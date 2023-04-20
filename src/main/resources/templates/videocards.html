@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Catalog - Video Cards</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="~{menu.html}"></div>
+
+<div class="container mt-3">
+    <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
+         th:text="${session.flash}"></div>
+    <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
+
+    <h2>Video Cards</h2>
+    <table id="Videocards" class="table table-bordered border-primary table-sm">
+        <tr>
+            <th>ID</th>
+            <th>Video Chip</th>
+            <th>Core Frequency</th>
+            <th>Number Of Pixel Pipelines</th>
+            <th>Peak Fill Rate MPix Per Sec</th>
+            <th>Number Of Texture Modules Per Pipeline</th>
+            <th>Textures Per Clock</th>
+            <th>Peak Fill Rate MTexels Per Sec</th>
+            <th>Textures Per Pass</th>
+            <th>Memory Frequency</th>
+            <th>Memory Bus Width Bits</th>
+            <th>Memory Bandwidth</th>
+        </tr>
+        <tr th:each="videocard : ${videocardList}">
+            <td th:text="${videocard.getId()}"></td>
+            <td>
+                <a th:href="@{/videocard/edit(id=${videocard.getId()})}"
+                   th:text="${videocard.getName()}"></a>
+            </td>
+            <td th:text="${videocard.getCoreFrequency()}"></td>
+            <td th:text="${videocard.getNumberOfPixelPipelines()}"></td>
+            <td th:text="${videocard.getPeakFillrateMPixPerSec()}"></td>
+            <td th:text="${videocard.getNumberOfTextureModulesPerPipeline()}"></td>
+            <td th:text="${videocard.getTexturesPerClock()}"></td>
+            <td th:text="${videocard.getPeakFillrateMTexelsPerSec()}"></td>
+            <td th:text="${videocard.getTexturesPerPass()}"></td>
+            <td th:text="${videocard.getMemoryFrequency()}"></td>
+            <td th:text="${videocard.getMemoryBusWidth()}"></td>
+            <td th:text="${videocard.getMemoryBandwidth()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

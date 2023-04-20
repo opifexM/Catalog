@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Catalog - Motherboard Edit</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="~{menu.html}"></div>
+
+<div class="container mt-3">
+    <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
+         th:text="${session.flash}"></div>
+    <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
+
+    <h2 th:text="'Motherboard ID: ' + ${motherboard.getId()}"></h2>
+    <form th:action="@{/motherboard/save}" th:object="${motherboard}" method="post">
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="chipset">Chipset:</label>
+            <input type="text" class="form-control" id="chipset" th:field="*{chipset}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="boardVendor">Board Vendor:</label>
+            <input type="text" class="form-control" id="boardVendor" th:field="*{boardVendor}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="boardModel">Board Model:</label>
+            <input type="text" class="form-control" id="boardModel" th:field="*{boardModel}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="formFactor">Form Factor:</label>
+            <input type="text" class="form-control" id="formFactor" th:field="*{formFactor}"/>
+        </div>
+        <div class="form-group">
+            <label for="cpuCoreVoltageController">CPU Core Voltage Controller:</label>
+            <input type="text" class="form-control" id="cpuCoreVoltageController"
+                   th:field="*{cpuCoreVoltageController}"/>
+        </div>
+        <div class="form-group">
+            <label for="controllerPhaseMode">Controller Phase Mode:</label>
+            <input type="text" class="form-control" id="controllerPhaseMode" th:field="*{controllerPhaseMode}"/>
+        </div>
+        <div class="form-group">
+            <label for="cpuCoreVRMDoublers">CPU Core VRM Doublers:</label>
+            <input type="text" class="form-control" id="cpuCoreVRMDoublers" th:field="*{cpuCoreVRMDoublers}"/>
+        </div>
+        <div class="form-group">
+            <label for="cpuCoreVoltagePhaseCount">CPU Core Voltage Phase Count:</label>
+            <input type="text" class="form-control" id="cpuCoreVoltagePhaseCount"
+                   th:field="*{cpuCoreVoltagePhaseCount}"/>
+        </div>
+        <div class="form-group">
+            <label for="mosfetOrPowerstageCombo">Mosfet Or Power Stage Combo:</label>
+            <input type="text" class="form-control" id="mosfetOrPowerstageCombo" th:field="*{mosfetOrPowerstageCombo}"/>
+        </div>
+        <div class="form-group">
+            <label for="igpuDoublerQuadruplerVoltageController">iGPU Doubler Quadrupler Voltage Controller:</label>
+            <input type="text" class="form-control" id="igpuDoublerQuadruplerVoltageController"
+                   th:field="*{iGPUDoublerQuadruplerVoltageController}"/>
+        </div>
+        <div class="form-group">
+            <label for="igpuVoltagePhaseCount">iGPU Voltage Phase Count:</label>
+            <input type="text" class="form-control" id="igpuVoltagePhaseCount" th:field="*{iGPUVoltagePhaseCount}"/>
+        </div>
+        <div class="form-group">
+            <label for="dualMosfetOrPowerstage">Dual Mosfet Or Power Stage:</label>
+            <input type="text" class="form-control" id="dualMosfetOrPowerstage" th:field="*{dualMosfetOrPowerstage}"/>
+        </div>
+        <div class="form-group">
+            <label for="bclkClockGenerator">Baseclock Generator:</label>
+            <input type="checkbox" class="form-check-input" id="bclkClockGenerator" th:field="*{bclkClockGenerator}"/>
+        </div>
+        <div class="form-group">
+            <label for="debugFeature">Debug Feature:</label>
+            <input type="text" class="form-control" id="debugFeature" th:field="*{debugFeature}"/>
+        </div>
+        <div class="form-group">
+            <label for="dualBIOS">Dual BIOS:</label>
+            <input type="checkbox" class="form-check-input" id="dualBIOS" th:field="*{dualBIOS}"/>
+        </div>
+        <div class="form-group">
+            <label for="biosFlashWithoutCompatibleCPU">Bios Flash Without Compatible CPU:</label>
+            <input type="checkbox" class="form-check-input" id="biosFlashWithoutCompatibleCPU"
+                   th:field="*{biosFlashWithoutCompatibleCPU}"/>
+        </div>
+        <div class="form-group">
+            <label for="rearIOClearCMOS">Rear IO Clear CMOS:</label>
+            <input type="checkbox" class="form-check-input" id="rearIOClearCMOS" th:field="*{rearIOClearCMOS}"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a class="btn btn-primary" href="/motherboard">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

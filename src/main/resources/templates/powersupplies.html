@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Catalog - Power Supplies</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="~{menu.html}"></div>
+
+<div class="container mt-3">
+    <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
+         th:text="${session.flash}"></div>
+    <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
+
+    <h2>Power Supplies</h2>
+    <table id="Powersupplies" class="table table-bordered border-primary table-sm">
+        <tr>
+            <th>ID</th>
+            <th>Model</th>
+            <th>Total Passport Power</th>
+            <th>Power On 12v Line</th>
+            <th>OEM</th>
+            <th>Platform</th>
+            <th>Secondary Circuit</th>
+            <th>Overclocking</th>
+            <th>Fan Operating Mode</th>
+            <th>Noise Level</th>
+            <th>Speeds At Medium Loads</th>
+            <th>Speeds At Full Load</th>
+            <th>Fan Bearing</th>
+            <th>Fan Size</th>
+            <th>Capacitors</th>
+            <th>Level Of Dynamic Stabilization</th>
+            <th>Pulsation Level</th>
+            <th>Length Of Power Cables</th>
+            <th>Modular Cable Connection</th>
+            <th>Length mm</th>
+        </tr>
+        <tr th:each="powersupply : ${powersupplyList}">
+            <td th:text="${powersupply.getId()}"></td>
+            <td>
+                <a th:href="@{/powersupply/edit(id=${powersupply.getId()})}"
+                   th:text="${powersupply.getModel()}"></a>
+            </td>
+            <td th:text="${powersupply.getTotalPassportPower()}"></td>
+            <td th:text="${powersupply.getPowerOn12vLine()}"></td>
+            <td th:text="${powersupply.getOem()}"></td>
+            <td th:text="${powersupply.getPlatform()}"></td>
+            <td th:text="${powersupply.getSecondaryCircuit()}"></td>
+            <td th:text="${powersupply.isOverclocking()}"></td>
+            <td th:text="${powersupply.getFanOperatingMode()}"></td>
+            <td th:text="${powersupply.getNoiseLevel()}"></td>
+            <td th:text="${powersupply.getSpeedsAtMediumLoads()}"></td>
+            <td th:text="${powersupply.getSpeedsAtFullLoad()}"></td>
+            <td th:text="${powersupply.getFanBearing()}"></td>
+            <td th:text="${powersupply.getFanSize()}"></td>
+            <td th:text="${powersupply.getCapacitors()}"></td>
+            <td th:text="${powersupply.getLevelOfDynamicStabilization()}"></td>
+            <td th:text="${powersupply.getPulsationLevel()}"></td>
+            <td th:text="${powersupply.getLengthOfPowerCables()}"></td>
+            <td th:text="${powersupply.isModularCableConnection()}"></td>
+            <td th:text="${powersupply.getLength()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

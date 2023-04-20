@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Catalog - Power Supplies Edit</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="~{menu.html}"></div>
+
+<div class="container mt-3">
+    <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
+         th:text="${session.flash}"></div>
+    <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
+
+    <h2 th:text="'Power Supply ID: ' + ${powersupply.getId()}"></h2>
+    <h2>Edit Power Supply</h2>
+    <form th:action="@{/powersupply/save}" th:object="${powersupply}" method="post">
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <input type="text" class="form-control" id="model" th:field="*{model}"/>
+        </div>
+        <div class="form-group">
+            <label for="totalPassportPower">Total Passport Power:</label>
+            <input type="number" class="form-control" id="totalPassportPower" th:field="*{totalPassportPower}"/>
+        </div>
+        <div class="form-group">
+            <label for="powerOn12vLine">Power On 12v Line:</label>
+            <input type="number" class="form-control" id="powerOn12vLine" th:field="*{powerOn12vLine}"/>
+        </div>
+        <div class="form-group">
+            <label for="oem">OEM:</label>
+            <input type="text" class="form-control" id="oem" th:field="*{oem}"/>
+        </div>
+        <div class="form-group">
+            <label for="platform">Platform:</label>
+            <input type="text" class="form-control" id="platform" th:field="*{platform}"/>
+        </div>
+        <div class="form-group">
+            <label for="secondaryCircuit">Secondary Circuit:</label>
+            <input type="text" class="form-control" id="secondaryCircuit" th:field="*{secondaryCircuit}"/>
+        </div>
+        <div class="form-group">
+            <label for="overclocking">Overclocking:</label>
+            <input type="checkbox" class="form-control" id="overclocking" th:field="*{overclocking}"/>
+        </div>
+        <div class="form-group">
+            <label for="fanOperatingMode">Fan Operating Mode:</label>
+            <input type="text" class="form-control" id="fanOperatingMode" th:field="*{fanOperatingMode}"/>
+        </div>
+        <div class="form-group">
+            <label for="noiseLevel">Noise Level:</label>
+            <input type="number" class="form-control" id="noiseLevel" th:field="*{noiseLevel}"/>
+        </div>
+        <div class="form-group">
+            <label for="speedsAtMediumLoads">Speeds At Medium Loads:</label>
+            <input type="text" class="form-control" id="speedsAtMediumLoads" th:field="*{speedsAtMediumLoads}"/>
+        </div>
+        <div class="form-group">
+            <label for="speedsAtFullLoad">Speeds At Full Load:</label>
+            <input type="text" class="form-control" id="speedsAtFullLoad" th:field="*{speedsAtFullLoad}"/>
+        </div>
+        <div class="form-group">
+            <label for="fanBearing">Fan Bearing:</label>
+            <input type="text" class="form-control" id="fanBearing" th:field="*{fanBearing}"/>
+        </div>
+        <div class="form-group">
+            <label for="fanSize">Fan Size:</label>
+            <input type="text" class="form-control" id="fanSize" th:field="*{fanSize}"/>
+        </div>
+        <div class="form-group">
+            <label for="capacitors">Capacitors:</label>
+            <input type="text" class="form-control" id="capacitors" th:field="*{capacitors}"/>
+        </div>
+        <div class="form-group">
+            <label for="levelOfDynamicStabilization">Level Of Dynamic Stabilization:</label>
+            <input type="text" class="form-control" id="levelOfDynamicStabilization"
+                   th:field="*{levelOfDynamicStabilization}"/>
+        </div>
+        <div class="form-group">
+            <label for="pulsationLevel">Pulsation Level:</label>
+            <input type="text" class="form-control" id="pulsationLevel" th:field="*{pulsationLevel}"/>
+        </div>
+        <div class="form-group">
+            <label for="lengthOfPowerCables">Length Of Power Cables:</label>
+            <input type="text" class="form-control" id="lengthOfPowerCables" th:field="*{lengthOfPowerCables}"/>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="modularCableConnection"
+                   th:field="*{modularCableConnection}"/>
+            <label class="form-check-label" for="modularCableConnection">Modular Cable Connection</label>
+        </div>
+        <div class="form-group">
+            <label for="length">Length:</label>
+            <input type="text" class="form-control" id="length" th:field="*{length}"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a class="btn btn-primary" href="/powersupply">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
