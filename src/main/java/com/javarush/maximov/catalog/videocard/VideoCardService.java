@@ -1,5 +1,6 @@
 package com.javarush.maximov.catalog.videocard;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface VideoCardService {
@@ -16,4 +17,14 @@ public interface VideoCardService {
     Iterable<VideoCard> saveList(Iterable<VideoCard> videoCards);
 
     void loadListFromJson();
+
+    Iterable<VideoCard> findByCoreFrequencyGreaterThanEqual(int coreFrequency);
+
+    Iterable<VideoCard> findByCoreFrequencyLessThan(int coreFrequency);
+
+    Iterable<VideoCard> findByMemoryBandwidthBetween(double memoryBandwidthStart, double memoryBandwidthEnd);
+
+    Iterable<VideoCard> findByNameContainsIgnoreCase(String name);
+
+    long count();
 }

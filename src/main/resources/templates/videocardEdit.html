@@ -18,53 +18,53 @@
 
     <h2 th:text="'Video Card ID: ' + ${videocard.getId()}"></h2>
     <form th:action="@{/videocard/save}" th:object="${videocard}" method="post">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="id">ID:</label>
             <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Video Chip:</label>
             <input type="text" class="form-control" id="name" th:field="*{name}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="coreFrequency">Core Frequency:</label>
             <input type="text" class="form-control" id="coreFrequency" th:field="*{coreFrequency}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="numberOfPixelPipelines">Number of Pixel Pipelines:</label>
             <input type="text" class="form-control" id="numberOfPixelPipelines" th:field="*{numberOfPixelPipelines}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="peakFillrateMPixPerSec">Peak Fill Rate MPix per Sec:</label>
             <input type="text" class="form-control" id="peakFillrateMPixPerSec" th:field="*{peakFillrateMPixPerSec}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="numberOfTextureModulesPerPipeline">Number of Texture Modules per Pipeline:</label>
             <input type="text" class="form-control" id="numberOfTextureModulesPerPipeline"
                    th:field="*{numberOfTextureModulesPerPipeline}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="texturesPerClock">Textures per Clock:</label>
             <input type="text" class="form-control" id="texturesPerClock" th:field="*{texturesPerClock}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="peakFillrateMTexelsPerSec">Peak Fill Rate MTexels per Sec:</label>
             <input type="text" class="form-control" id="peakFillrateMTexelsPerSec"
                    th:field="*{peakFillrateMTexelsPerSec}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="texturesPerPass">Textures per Pass:</label>
             <input type="text" class="form-control" id="texturesPerPass" th:field="*{texturesPerPass}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="memoryFrequency">Memory Frequency:</label>
             <input type="text" class="form-control" id="memoryFrequency" th:field="*{memoryFrequency}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="memoryBusWidth">Memory Bus Width (bits):</label>
             <input type="text" class="form-control" id="memoryBusWidth" th:field="*{memoryBusWidth}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="memoryBandwidth">Memory Bandwidth:</label>
             <input type="text" class="form-control" id="memoryBandwidth" th:field="*{memoryBandwidth}"/>
         </div>

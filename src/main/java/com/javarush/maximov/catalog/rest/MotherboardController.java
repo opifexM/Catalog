@@ -31,7 +31,7 @@ public class MotherboardController {
     }
 
     @GetMapping(value = "/edit")
-    public String editMotherboard(@RequestParam(name = "id") Long id, Model model) {
+    public String getEditMotherboardForm(@RequestParam(name = "id") Long id, Model model) {
         Optional<Motherboard> optionalMotherboard = motherboardService.findById(id);
         if (optionalMotherboard.isPresent()) {
             model.addAttribute("motherboard", optionalMotherboard.get());

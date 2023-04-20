@@ -15,48 +15,52 @@
     <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
          th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
-    <h2 th:text="${message}">Hello Good Morning!.</h2>
 
-    <form method="post" th:action="@{/delete}">
-        <input type="submit" value="remove all motherboars">
-    </form>
+    <h2>Welcome to the Computer Catalog!</h2>
 
-    <form method="post" th:action="@{/upload}">
-        <input type="submit" value="upload motherboars">
-    </form>
+    <div class="col-md-4 border border-info rounded">
+        <p>Items in the database:</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Product Type</th>
+                <th scope="col">Count</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    <table id="motherboard">
-        <tr>
-            <th>Motherboard - id</th>
-            <th>chipset</th>
-            <th>model</th>
-        </tr>
-        <tr th:each="motherboard : ${motherboardList}">
-            <td th:text="${motherboard.getId()}"></td>
-            <td th:text="${motherboard.getChipset()}"></td>
-            <td th:text="${motherboard.getBoardModel()}"></td>
-        </tr>
-    </table>
-    <table id="powersupply">
-        <tr>
-            <th>Power Supply - id</th>
-            <th>chipset</th>
-        </tr>
-        <tr th:each="powerSupply : ${powerSupplyList}">
-            <td th:text="${powerSupply.getId()}"></td>
-            <td th:text="${powerSupply.getModel()}"></td>
-        </tr>
-    </table>
-    <table id="videocard">
-        <tr>
-            <th>Video Card - id</th>
-            <th>chipset</th>
-        </tr>
-        <tr th:each="videoCard : ${videoCardList}">
-            <td th:text="${videoCard.getId()}"></td>
-            <td th:text="${videoCard.getName()}"></td>
-        </tr>
-    </table>
+            <tr>
+                <td>Computers</td>
+                <td th:text="${computerCount}">20</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Motherboards</td>
+                <td th:text="${motherboardCount}">20</td>
+                <td>Spring Data JPA Specification API</td>
+            </tr>
+            <tr>
+                <td>Power Supplies</td>
+                <td th:text="${powerSupplyCount}">30</td>
+                <td>Annotation-based Query Declaration</td>
+            </tr>
+            <tr>
+                <td>Video Cards</td>
+                <td th:text="${videoCardCount}">40</td>
+                <td>Query Creation from Method Names</td>
+            </tr>
+        </table>
+
+        <div class="mb-3">
+            <form method="post" th:action="@{/delete}">
+                <input type="submit" class="btn btn-danger" value="Clear all tables">
+            </form>
+            <form method="post" th:action="@{/upload}">
+                <input type="submit" class="btn btn-success" value="Upload data">
+            </form>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

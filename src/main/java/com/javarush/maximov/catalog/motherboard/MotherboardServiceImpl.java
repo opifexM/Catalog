@@ -2,6 +2,7 @@ package com.javarush.maximov.catalog.motherboard;
 
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class MotherboardServiceImpl implements MotherboardService {
 
     @Override
     public Iterable<Motherboard> findAll() {
-        return motherboardRepository.findAll();
+        return motherboardRepository.findAll(Sort.by("id"));
     }
 
     @Override
@@ -53,6 +54,11 @@ public class MotherboardServiceImpl implements MotherboardService {
     public void loadListFromJson() {
         List<Motherboard> motherboardList = JsonService.jsonToList(MOTHERBOARD_JSON, Motherboard[].class);
         saveList(motherboardList);
+    }
+
+    @Override
+    public long count() {
+        return motherboardRepository.count();
     }
 }
 

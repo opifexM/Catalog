@@ -19,31 +19,44 @@
     <h2 th:text="'Computer ID: ' + ${computer.getId()}"></h2>
 
     <form th:action="@{/computer/save}" th:object="${computer}" method="post">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="id">ID:</label>
             <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" th:field="*{name}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="motherboard">Motherboard:</label>
             <select class="form-control" id="motherboard" th:field="*{motherboard}">
                 <option th:each="mb : ${motherboardList}" th:value="${mb.getId()}"
                         th:text="${mb.getChipset() + ' - ' + mb.getBoardVendor() + ' ' + mb.getBoardModel()}"/>
             </select>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="powerSupply">Power Supply:</label>
             <select class="form-control" id="powerSupply" th:field="*{powerSupply}">
                 <option th:each="ps : ${powerSupplyList}" th:value="${ps.getId()}" th:text="${ps.getModel()}"/>
             </select>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="videoCards">Video Cards:</label>
             <select class="form-control" id="videoCards" th:field="*{videoCards}" multiple="multiple">
                 <option th:each="vc : ${videoCardList}" th:value="${vc.getId()}" th:text="${vc.getName()}"/>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="testing">Testing:</label>
+            <input type="checkbox" id="testing" th:field="*{testing}"/>
+        </div>
+        <div class="mb-3">
+            <label for="computerStatus">Computer Status:</label>
+            <select class="form-control" id="computerStatus" th:field="*{computerStatus}">
+                <option th:value="${T(com.javarush.maximov.catalog.computer.ComputerStatus).FORMED}" th:text="FORMED"></option>
+                <option th:value="${T(com.javarush.maximov.catalog.computer.ComputerStatus).TESTED}" th:text="TESTED"></option>
+                <option th:value="${T(com.javarush.maximov.catalog.computer.ComputerStatus).READY}" th:text="'READY FOR SALE'"></option>
+                <option th:value="${T(com.javarush.maximov.catalog.computer.ComputerStatus).SOLD}" th:text="SOLD"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-success">Save Changes</button>

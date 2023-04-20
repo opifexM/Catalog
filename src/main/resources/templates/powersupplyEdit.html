@@ -17,83 +17,82 @@
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
     <h2 th:text="'Power Supply ID: ' + ${powersupply.getId()}"></h2>
-    <h2>Edit Power Supply</h2>
     <form th:action="@{/powersupply/save}" th:object="${powersupply}" method="post">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="model">Model:</label>
             <input type="text" class="form-control" id="model" th:field="*{model}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="totalPassportPower">Total Passport Power:</label>
             <input type="number" class="form-control" id="totalPassportPower" th:field="*{totalPassportPower}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="powerOn12vLine">Power On 12v Line:</label>
             <input type="number" class="form-control" id="powerOn12vLine" th:field="*{powerOn12vLine}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="oem">OEM:</label>
             <input type="text" class="form-control" id="oem" th:field="*{oem}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="platform">Platform:</label>
             <input type="text" class="form-control" id="platform" th:field="*{platform}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="secondaryCircuit">Secondary Circuit:</label>
             <input type="text" class="form-control" id="secondaryCircuit" th:field="*{secondaryCircuit}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="overclocking">Overclocking:</label>
-            <input type="checkbox" class="form-control" id="overclocking" th:field="*{overclocking}"/>
+            <input type="checkbox" id="overclocking" th:field="*{overclocking}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="fanOperatingMode">Fan Operating Mode:</label>
             <input type="text" class="form-control" id="fanOperatingMode" th:field="*{fanOperatingMode}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="noiseLevel">Noise Level:</label>
             <input type="number" class="form-control" id="noiseLevel" th:field="*{noiseLevel}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="speedsAtMediumLoads">Speeds At Medium Loads:</label>
             <input type="text" class="form-control" id="speedsAtMediumLoads" th:field="*{speedsAtMediumLoads}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="speedsAtFullLoad">Speeds At Full Load:</label>
             <input type="text" class="form-control" id="speedsAtFullLoad" th:field="*{speedsAtFullLoad}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="fanBearing">Fan Bearing:</label>
             <input type="text" class="form-control" id="fanBearing" th:field="*{fanBearing}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="fanSize">Fan Size:</label>
             <input type="text" class="form-control" id="fanSize" th:field="*{fanSize}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="capacitors">Capacitors:</label>
             <input type="text" class="form-control" id="capacitors" th:field="*{capacitors}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="levelOfDynamicStabilization">Level Of Dynamic Stabilization:</label>
             <input type="text" class="form-control" id="levelOfDynamicStabilization"
                    th:field="*{levelOfDynamicStabilization}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="pulsationLevel">Pulsation Level:</label>
             <input type="text" class="form-control" id="pulsationLevel" th:field="*{pulsationLevel}"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="lengthOfPowerCables">Length Of Power Cables:</label>
             <input type="text" class="form-control" id="lengthOfPowerCables" th:field="*{lengthOfPowerCables}"/>
         </div>
-        <div class="form-group form-check">
+        <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="modularCableConnection"
                    th:field="*{modularCableConnection}"/>
             <label class="form-check-label" for="modularCableConnection">Modular Cable Connection</label>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="length">Length:</label>
             <input type="text" class="form-control" id="length" th:field="*{length}"/>
         </div>

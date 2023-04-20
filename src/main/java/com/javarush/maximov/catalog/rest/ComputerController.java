@@ -43,7 +43,7 @@ public class ComputerController {
     }
 
     @GetMapping(value = "/computer/edit")
-    public String getComputerForEdit(@RequestParam(name = "id") Long id, Model model) {
+    public String getEditComputerForm(@RequestParam(name = "id") Long id, Model model) {
         Optional<Computer> optionalComputer = computerService.findById(id);
         if (optionalComputer.isPresent()) {
             model.addAttribute("computer", optionalComputer.get());
@@ -56,7 +56,7 @@ public class ComputerController {
     }
 
     @GetMapping(value = "/computer/new")
-    public String getNewComputer(Model model) {
+    public String getNewComputerForm(Model model) {
         model.addAttribute("computer", new Computer());
         model.addAttribute("motherboardList", motherboardService.findAll());
         model.addAttribute("powerSupplyList", powerSupplyService.findAll());

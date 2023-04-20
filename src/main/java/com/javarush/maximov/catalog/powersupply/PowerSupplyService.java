@@ -16,4 +16,6 @@ public interface PowerSupplyService {
     Iterable<PowerSupply> saveList(Iterable<PowerSupply> powerSupplies);
 
     void loadListFromJson();
+
+    long count();
 }

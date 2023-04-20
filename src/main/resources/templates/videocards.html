@@ -16,7 +16,61 @@
          th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
-    <h2>Video Cards</h2>
+    <h2>Video Cards - Query Creation</h2>
+    <div class="row">
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/videocard/search}">
+                <div class="mb-3">
+                    <label for="core">Core Frequency:</label>
+                    <input type="number" class="form-control" id="core" name="core" th:value="${videocardCore}" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="operator">Operator:</label>
+                    <select class="form-control" id="operator" name="operator">
+                        <option value="greaterThanEqual">&ge;</option>
+                        <option value="lessThan">&lt;</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/videocard/search}">
+                <div class="mb-3">
+                    <label for="memoryBandwidthStart">Memory Bandwidth Start:</label>
+                    <input type="number" class="form-control" id="memoryBandwidthStart" name="memoryBandwidthStart"
+                           th:value="${videocardMemoryBandwidthStart}" placeholder="Memory Bandwidth Start" required>
+                </div>
+                <div class="mb-3">
+                    <label for="memoryBandwidthEnd">Memory Bandwidth End:</label>
+                    <input type="number" class="form-control" id="memoryBandwidthEnd" name="memoryBandwidthEnd"
+                           th:value="${videocardMemoryBandwidthEnd}" placeholder="Memory Bandwidth End" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/videocard/search}">
+                <div class="mb-3">
+                    <label for="name">Video Chip:</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           th:value="${videocardName}" placeholder="Contain name" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<div class="mb-3">
+</div>
+
     <table id="Videocards" class="table table-bordered border-primary table-sm">
         <tr>
             <th>ID</th>

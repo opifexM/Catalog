@@ -16,4 +16,6 @@ public interface MotherboardService {
     Iterable<Motherboard> saveList(Iterable<Motherboard> motherboards);
 
     void loadListFromJson();
+
+    long count();
 }

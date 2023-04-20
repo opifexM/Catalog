@@ -2,6 +2,7 @@ package com.javarush.maximov.catalog.powersupply;
 
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
 
     @Override
     public Iterable<PowerSupply> findAll() {
-        return powerSupplyRepository.findAll();
+        return powerSupplyRepository.findAll(Sort.by("id"));
     }
 
     @Override
@@ -53,6 +54,11 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
     public void loadListFromJson() {
         List<PowerSupply> powerSupplyList = JsonService.jsonToList(POWERSUPPLY_JSON, PowerSupply[].class);
         saveList(powerSupplyList);
+    }
+
+    @Override
+    public long count() {
+        return powerSupplyRepository.count();
     }
 }
 

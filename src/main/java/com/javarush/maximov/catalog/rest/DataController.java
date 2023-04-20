@@ -43,9 +43,10 @@ public class DataController {
     @GetMapping(value = "")
     public String index(Model model) {
         model.addAttribute("message", "Hello World2222!");
-        model.addAttribute("motherboardList", motherboardService.findAll());
-        model.addAttribute("powerSupplyList", powerSupplyService.findAll());
-        model.addAttribute("videoCardList", videoCardService.findAll());
+        model.addAttribute("computerCount", computerService.count());
+        model.addAttribute("motherboardCount", motherboardService.count());
+        model.addAttribute("powerSupplyCount", powerSupplyService.count());
+        model.addAttribute("videoCardCount", videoCardService.count());
         return "index";
     }
 
@@ -67,31 +68,30 @@ public class DataController {
 
         Computer computer = new Computer();
         computer.setName("For Testing");
-        computer.setMotherboard(motherboardService.findById(1025).get());
-        computer.setPowerSupply(powerSupplyService.findById(400).get());
+        computer.setMotherboard(motherboardService.findById(10).get());
+        computer.setPowerSupply(powerSupplyService.findById(15).get());
         List<VideoCard> videoCardList = new ArrayList<>();
-        videoCardList.add(videoCardService.findById(529).get());
-        videoCardList.add(videoCardService.findById(539).get());
+        videoCardList.add(videoCardService.findById(5).get());
+        videoCardList.add(videoCardService.findById(6).get());
         computer.setVideoCards(videoCardList);
         computerService.save(computer);
 
         Computer computer2 = new Computer();
         computer2.setName("For Gaming");
-        computer2.setMotherboard(motherboardService.findById(1030).get());
-        computer2.setPowerSupply(powerSupplyService.findById(410).get());
+        computer2.setMotherboard(motherboardService.findById(12).get());
+        computer2.setPowerSupply(powerSupplyService.findById(18).get());
         List<VideoCard> videoCardList2 = new ArrayList<>();
-        videoCardList2.add(videoCardService.findById(549).get());
-        videoCardList2.add(videoCardService.findById(559).get());
+        videoCardList2.add(videoCardService.findById(3).get());
         computer2.setVideoCards(videoCardList2);
         computerService.save(computer2);
 
         Computer computer3 = new Computer();
         computer3.setName("For Office");
-        computer3.setMotherboard(motherboardService.findById(1040).get());
-        computer3.setPowerSupply(powerSupplyService.findById(420).get());
+        computer3.setMotherboard(motherboardService.findById(14).get());
+        computer3.setPowerSupply(powerSupplyService.findById(20).get());
         List<VideoCard> videoCardList3 = new ArrayList<>();
-        videoCardList3.add(videoCardService.findById(560).get());
-        videoCardList3.add(videoCardService.findById(561).get());
+        videoCardList3.add(videoCardService.findById(28).get());
+        videoCardList3.add(videoCardService.findById(29).get());
         computer3.setVideoCards(videoCardList3);
         computerService.save(computer3);
 

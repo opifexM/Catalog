@@ -8,7 +8,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 667,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 166,
     "memoryBusWidth": 128,
     "memoryBandwidth": 5.0
@@ -22,7 +22,7 @@
     "numberOfTextureModulesPerPipeline": 3,
     "texturesPerClock": 6,
     "peakFillrateMTexelsPerSec": 1098,
-    "textures_per_pass": 6,
+    "texturesPerPass": 6,
     "memoryFrequency": 366,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -36,7 +36,7 @@
     "numberOfTextureModulesPerPipeline": 3,
     "texturesPerClock": 6,
     "peakFillrateMTexelsPerSec": 1740,
-    "textures_per_pass": 6,
+    "texturesPerPass": 6,
     "memoryFrequency": 460,
     "memoryBusWidth": 128,
     "memoryBandwidth": 7.0
@@ -50,7 +50,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2200,
-    "textures_per_pass": 24,
+    "texturesPerPass": 24,
     "memoryFrequency": 540,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -64,7 +64,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1840,
-    "textures_per_pass": 24,
+    "texturesPerPass": 24,
     "memoryFrequency": 380,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -78,7 +78,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 24,
+    "texturesPerPass": 24,
     "memoryFrequency": 540,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -92,7 +92,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1100,
-    "textures_per_pass": 24,
+    "texturesPerPass": 24,
     "memoryFrequency": 550,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -106,7 +106,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2200,
-    "textures_per_pass": 24,
+    "texturesPerPass": 24,
     "memoryFrequency": 540,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -120,7 +120,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1100,
-    "textures_per_pass": 64,
+    "texturesPerPass": 64,
     "memoryFrequency": 540,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -134,7 +134,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2200,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 540,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -148,7 +148,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1600,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 600,
     "memoryBusWidth": 128,
     "memoryBandwidth": 10.0
@@ -162,7 +162,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2200,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 540,
     "memoryBusWidth": 256,
     "memoryBandwidth": 17.0
@@ -176,7 +176,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2600,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 620,
     "memoryBusWidth": 256,
     "memoryBandwidth": 20.0
@@ -190,7 +190,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2600,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 620,
     "memoryBusWidth": 256,
     "memoryBandwidth": 20.0
@@ -204,7 +204,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 3040,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 680,
     "memoryBusWidth": 256,
     "memoryBandwidth": 22.0
@@ -218,7 +218,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 3040,
-    "textures_per_pass": 128,
+    "texturesPerPass": 128,
     "memoryFrequency": 700,
     "memoryBusWidth": 256,
     "memoryBandwidth": 22.0
@@ -232,7 +232,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 2,
     "peakFillrateMTexelsPerSec": 230,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 115,
     "memoryBusWidth": 128,
     "memoryBandwidth": 2.0
@@ -246,7 +246,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 2,
     "peakFillrateMTexelsPerSec": 350,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 178,
     "memoryBusWidth": 128,
     "memoryBandwidth": 3.0
@@ -260,7 +260,7 @@
     "numberOfTextureModulesPerPipeline": 4,
     "texturesPerClock": 16,
     "peakFillrateMTexelsPerSec": 3200,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 500,
     "memoryBusWidth": 256,
     "memoryBandwidth": 16.0
@@ -274,7 +274,7 @@
     "numberOfTextureModulesPerPipeline": 4,
     "texturesPerClock": 16,
     "peakFillrateMTexelsPerSec": 3520,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 550,
     "memoryBusWidth": 256,
     "memoryBandwidth": 18.0
@@ -288,7 +288,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 480,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 166,
     "memoryBusWidth": 128,
     "memoryBandwidth": 3.0
@@ -302,7 +302,7 @@
     "numberOfTextureModulesPerPipeline": 1,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 480,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 300,
     "memoryBusWidth": 128,
     "memoryBandwidth": 5.0
@@ -316,7 +316,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 700,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 166,
     "memoryBusWidth": 128,
     "memoryBandwidth": 3.0
@@ -330,7 +330,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 800,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 183,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -344,7 +344,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1600,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 333,
     "memoryBusWidth": 128,
     "memoryBandwidth": 5.0
@@ -358,7 +358,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 460,
     "memoryBusWidth": 128,
     "memoryBandwidth": 7.0
@@ -372,7 +372,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1600,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 400,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -386,7 +386,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 400,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -400,7 +400,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1400,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 400,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -414,7 +414,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1600,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 460,
     "memoryBusWidth": 128,
     "memoryBandwidth": 7.0
@@ -428,7 +428,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1920,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 500,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -442,7 +442,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1000,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 166,
     "memoryBusWidth": 128,
     "memoryBandwidth": 3.0
@@ -456,7 +456,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1080,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 500,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -470,7 +470,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1100,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 512,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -484,7 +484,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1200,
-    "textures_per_pass": 4,
+    "texturesPerPass": 4,
     "memoryFrequency": 550,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -498,7 +498,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 444,
     "memoryBusWidth": 128,
     "memoryBandwidth": 7.0
@@ -512,7 +512,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 500,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -526,7 +526,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 512,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -540,7 +540,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2200,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 550,
     "memoryBusWidth": 128,
     "memoryBandwidth": 9.0
@@ -554,7 +554,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2400,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 650,
     "memoryBusWidth": 128,
     "memoryBandwidth": 10.0
@@ -568,7 +568,7 @@
     "numberOfTextureModulesPerPipeline": 4,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 400,
     "memoryBusWidth": 128,
     "memoryBandwidth": 6.0
@@ -582,7 +582,7 @@
     "numberOfTextureModulesPerPipeline": 4,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 16,
+    "texturesPerPass": 16,
     "memoryFrequency": 400,
     "memoryBusWidth": 64,
     "memoryBandwidth": 3.0
@@ -596,7 +596,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 4,
     "peakFillrateMTexelsPerSec": 1300,
-    "textures_per_pass": 1024,
+    "texturesPerPass": 1024,
     "memoryFrequency": 500,
     "memoryBusWidth": 128,
     "memoryBandwidth": 11.0
@@ -610,7 +610,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 3200,
-    "textures_per_pass": 1024,
+    "texturesPerPass": 1024,
     "memoryFrequency": 800,
     "memoryBusWidth": 128,
     "memoryBandwidth": 13.0
@@ -624,7 +624,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 4000,
-    "textures_per_pass": 1024,
+    "texturesPerPass": 1024,
     "memoryFrequency": 1000,
     "memoryBusWidth": 128,
     "memoryBandwidth": 16.0
@@ -638,7 +638,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 1600,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 333,
     "memoryBusWidth": 128,
     "memoryBandwidth": 5.0
@@ -652,7 +652,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2000,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 500,
     "memoryBusWidth": 128,
     "memoryBandwidth": 8.0
@@ -666,7 +666,7 @@
     "numberOfTextureModulesPerPipeline": 2,
     "texturesPerClock": 8,
     "peakFillrateMTexelsPerSec": 2400,
-    "textures_per_pass": 8,
+    "texturesPerPass": 8,
     "memoryFrequency": 600,
     "memoryBusWidth": 128,
     "memoryBandwidth": 10.0

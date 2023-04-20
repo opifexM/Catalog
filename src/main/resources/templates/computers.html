@@ -17,7 +17,9 @@
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
     <h2>Computers</h2>
-    <a class="btn btn-success" href="/computer/new">Create New</a>
+    <div class="mb-3">
+        <a class="btn btn-success" href="/computer/new">Create New</a>
+    </div>
     <table id="Computers" class="table table-bordered border-primary">
         <tr>
             <th>ID</th>
@@ -25,6 +27,8 @@
             <th>Motherboard</th>
             <th>Power Supply</th>
             <th>Video Cards</th>
+            <th>Testing</th>
+            <th>Status</th>
             <th>Control</th>
         </tr>
         <tr th:each="computer : ${computerList}">
@@ -46,6 +50,14 @@
                         <a th:href="@{/videocard/edit(id=${videocard.getId()})}" th:text="${videocard.getName()}"></a>
                     </li>
                 </ul>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" th:checked="${computer.isTesting()}" disabled>
+                </label>
+            </td>
+            <td>
+                <span th:text="${computer.getComputerStatus()}"></span>
             </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/computer/edit(id=${computer.getId})}">Edit</a>

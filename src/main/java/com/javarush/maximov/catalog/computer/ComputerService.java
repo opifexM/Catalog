@@ -1,6 +1,8 @@
 package com.javarush.maximov.catalog.computer;
 
 import com.javarush.maximov.catalog.motherboard.Motherboard;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
 
@@ -17,5 +19,5 @@ public interface ComputerService {
 
     Iterable<Computer> saveList(Iterable<Computer> computers);
 
-    void loadListFromJson();
+    long count();
 }

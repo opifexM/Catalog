@@ -3,6 +3,7 @@ package com.javarush.maximov.catalog.computer;
 
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public Iterable<Computer> findAll() {
-        return computerRepository.findAll();
+        return computerRepository.findAll(Sort.by("id"));
     }
 
     @Override
@@ -51,9 +52,10 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
-    public void loadListFromJson() {
-        List<Computer> computerList = JsonService.jsonToList(COMPUTER_JSON, Computer[].class);
-        saveList(computerList);
+    public long count() {
+        return computerRepository.count();
     }
+
+
 }
 

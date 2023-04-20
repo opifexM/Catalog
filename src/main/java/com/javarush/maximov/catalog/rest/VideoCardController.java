@@ -31,7 +31,7 @@ public class VideoCardController {
     }
 
     @GetMapping(value = "/edit")
-    public String editVideocard(@RequestParam(name = "id") Long id, Model model) {
+    public String getEditVideocardForm(@RequestParam(name = "id") Long id, Model model) {
         Optional<VideoCard> optionalVideoCard = videoCardService.findById(id);
         if (optionalVideoCard.isPresent()) {
             model.addAttribute("videocard", optionalVideoCard.get());
@@ -45,4 +45,52 @@ public class VideoCardController {
         videoCardService.save(videoCard);
         return "redirect:/videocard";
     }
+
+    // @GetMapping(value = "/search")
+    // public String searchVideocards(@RequestParam(name = "core") Integer core,
+    //                                @RequestParam(name = "operator") String operator,
+    //                                Model model) {
+    //     Iterable<VideoCard> videoCards = switch (operator) {
+    //         case "greaterThanEqual" -> videoCardService.findByCoreFrequencyGreaterThanEqual(core);
+    //         case "lessThan" -> videoCardService.findByCoreFrequencyLessThan(core);
+    //         default -> videoCardService.findAll();
+    //     };
+    //     model.addAttribute("videocardList", videoCards);
+    //     model.addAttribute("videocardCore", core);
+    //
+    //     return "videocards";
+    // }
+
+    @GetMapping("/search")
+    public String searchVideocards(@RequestParam(name = "core", required = false) Integer core,
+                                   @RequestParam(name = "operator", defaultValue = "greaterThanEqual") String operator,
+                                   @RequestParam(name = "memoryBandwidthStart", required = false) Double memoryBandwidthStart,
+                                   @RequestParam(name = "memoryBandwidthEnd", required = false) Double memoryBandwidthEnd,
+                                   @RequestParam(name = "name", required = false) String name,
+                                   Model model) {
+        Iterable<VideoCard> videoCards;
+        if (core != null) {
+            switch (operator) {
+                case "greaterThanEqual" -> videoCards = videoCardService.findByCoreFrequencyGreaterThanEqual(core);
+                case "lessThan" -> videoCards = videoCardService.findByCoreFrequencyLessThan(core);
+                default -> videoCards = videoCardService.findAll();
+            }
+            model.addAttribute("videocardCore", core);
+
+        } else if (memoryBandwidthStart != null && memoryBandwidthEnd != null) {
+            videoCards = videoCardService.findByMemoryBandwidthBetween(memoryBandwidthStart, memoryBandwidthEnd);
+            model.addAttribute("videocardMemoryBandwidthStart", memoryBandwidthStart);
+            model.addAttribute("videocardMemoryBandwidthEnd", memoryBandwidthEnd);
+
+        } else if (name != null) {
+            videoCards = videoCardService.findByNameContainsIgnoreCase(name);
+            model.addAttribute("videocardName", name);
+
+        } else {
+            videoCards = videoCardService.findAll();
+        }
+        model.addAttribute("videocardList", videoCards);
+        return "videocards";
+    }
+
 }

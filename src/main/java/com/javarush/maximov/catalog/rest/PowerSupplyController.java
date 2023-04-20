@@ -31,7 +31,7 @@ public class PowerSupplyController {
     }
 
     @GetMapping(value = "/edit")
-    public String editPowersupply(@RequestParam(name = "id") Long id, Model model) {
+    public String getEditPowersupplyForm(@RequestParam(name = "id") Long id, Model model) {
         Optional<PowerSupply> optionalPowerSupply = powerSupplyService.findById(id);
         if (optionalPowerSupply.isPresent()) {
             model.addAttribute("powersupply", optionalPowerSupply.get());
