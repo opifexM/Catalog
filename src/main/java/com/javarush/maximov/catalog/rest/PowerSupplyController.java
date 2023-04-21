@@ -30,6 +30,38 @@ public class PowerSupplyController {
         return "powersupplies";
     }
 
+    @GetMapping("/search")
+    public String searchPowersupplies(@RequestParam(name = "powerStart", required = false) Integer powerStart,
+                                      @RequestParam(name = "powerEnd", required = false) Integer powerEnd,
+                                      @RequestParam(name = "fanSize", required = false) Integer fanSize,
+                                      @RequestParam(name = "fanSizeOperator", defaultValue = "greaterThanEqual") String fanSizeOperator,
+                                      @RequestParam(name = "name", required = false) String name,
+                                      Model model) {
+        Iterable<PowerSupply> powerSupplies;
+        if (fanSize != null) {
+            switch (fanSizeOperator) {
+                case "greaterThanEqual" -> powerSupplies = powerSupplyService.findByFanSizeGreaterThanEqual(fanSize);
+                case "lessThan" -> powerSupplies = powerSupplyService.findByFanSizeLessThan(fanSize);
+                default -> powerSupplies = powerSupplyService.findAll();
+            }
+            model.addAttribute("powersupplyFanSize", fanSize);
+
+        } else if (powerStart != null && powerEnd != null) {
+            powerSupplies = powerSupplyService.findByPowerBetween(powerStart, powerEnd);
+            model.addAttribute("powersupplyPowerStart", powerStart);
+            model.addAttribute("powersupplyPowerEnd", powerEnd);
+
+        } else if (name != null) {
+            powerSupplies = powerSupplyService.findByNameContainsIgnoreCase(name);
+            model.addAttribute("powersupplyName", name);
+
+        } else {
+            powerSupplies = powerSupplyService.findAll();
+        }
+        model.addAttribute("powersupplyList", powerSupplies);
+        return "powersupplies";
+    }
+
     @GetMapping(value = "/edit")
     public String getEditPowersupplyForm(@RequestParam(name = "id") Long id, Model model) {
         Optional<PowerSupply> optionalPowerSupply = powerSupplyService.findById(id);

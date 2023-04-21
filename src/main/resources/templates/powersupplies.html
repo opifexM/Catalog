@@ -16,7 +16,60 @@
          th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
-    <h2>Power Supplies</h2>
+    <h2>Power Supplies - Annotation-based Query Declaration</h2>
+    <div class="row">
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/powersupply/search}">
+                <div class="mb-3">
+                    <label for="fanSize">Fan Size mm:</label>
+                    <input type="number" class="form-control" id="fanSize" name="fanSize" th:value="${powersupplyFanSize}" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="fanSizeOperator">Operator:</label>
+                    <select class="form-control" id="fanSizeOperator" name="fanSizeOperator">
+                        <option value="greaterThanEqual">&ge;</option>
+                        <option value="lessThan">&lt;</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/powersupply/search}">
+                <div class="mb-3">
+                    <label for="powerStart">Power On 12v Line Start:</label>
+                    <input type="number" class="form-control" id="powerStart" name="powerStart"
+                           th:value="${powersupplyPowerStart}" placeholder="Number of volts Start" required>
+                </div>
+                <div class="mb-3">
+                    <label for="powerEnd">Power On 12v Line End:</label>
+                    <input type="number" class="form-control" id="powerEnd" name="powerEnd"
+                           th:value="${powersupplyPowerEnd}" placeholder="Number of volts End" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4 border border-info rounded">
+            <form method="GET" th:action="@{/powersupply/search}">
+                <div class="mb-3">
+                    <label for="name">Model:</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           th:value="${powersupplyName}" placeholder="Contain name" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="mb-3"></div>
+
     <table id="Powersupplies" class="table table-bordered border-primary table-sm">
         <tr>
             <th>ID</th>

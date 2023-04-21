@@ -60,5 +60,25 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
     public long count() {
         return powerSupplyRepository.count();
     }
+
+    @Override
+    public Iterable<PowerSupply> findByNameContainsIgnoreCase(String name) {
+        return powerSupplyRepository.findByNameContainsIgnoreCase(name);
+    }
+
+    @Override
+    public Iterable<PowerSupply> findByPowerBetween(int powerStart, int powerEnd) {
+        return powerSupplyRepository.findByPowerBetween(powerStart, powerEnd);
+    }
+
+    @Override
+    public Iterable<PowerSupply> findByFanSizeGreaterThanEqual(int fanSize) {
+        return powerSupplyRepository.findByFanSizeGreaterThanEqual(fanSize);
+    }
+
+    @Override
+    public Iterable<PowerSupply> findByFanSizeLessThan(int fanSize) {
+        return powerSupplyRepository.findByFanSizeLessThan(fanSize);
+    }
 }
 

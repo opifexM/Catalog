@@ -49,18 +49,25 @@
                 <td th:text="${videoCardCount}">40</td>
                 <td>Query Creation from Method Names</td>
             </tr>
-        </table>
+            <tr>
+                <div class="mb-3">
+                    <td>
+                        <form method="post" th:action="@{/delete}">
+                            <input type="submit" class="btn btn-danger" value="Clear all tables">
+                        </form>
+                    </td>
 
-        <div class="mb-3">
-            <form method="post" th:action="@{/delete}">
-                <input type="submit" class="btn btn-danger" value="Clear all tables">
-            </form>
-            <form method="post" th:action="@{/upload}">
-                <input type="submit" class="btn btn-success" value="Upload data">
-            </form>
-        </div>
+                    <td></td>
+                    <td>
+                        <form method="post" th:action="@{/upload}">
+                            <input type="submit" class="btn btn-success" value="Upload data">
+                        </form>
+                    </td>
+                </div>
+            </tr>
+    </table>
 
-    </div>
+</div>
 </div>
 </body>
 </html>

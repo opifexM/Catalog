@@ -18,4 +18,12 @@ public interface PowerSupplyService {
     void loadListFromJson();
 
     long count();
+
+    Iterable<PowerSupply> findByNameContainsIgnoreCase(String name);
+
+    Iterable<PowerSupply> findByPowerBetween(int powerStart, int powerEnd);
+
+    Iterable<PowerSupply> findByFanSizeGreaterThanEqual(int fanSize);
+
+    Iterable<PowerSupply> findByFanSizeLessThan(int fanSize);
 }
