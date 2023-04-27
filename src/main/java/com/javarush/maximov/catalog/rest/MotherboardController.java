@@ -4,6 +4,9 @@ import com.javarush.maximov.catalog.motherboard.Motherboard;
 import com.javarush.maximov.catalog.motherboard.MotherboardDto;
 import com.javarush.maximov.catalog.motherboard.MotherboardFilter;
 import com.javarush.maximov.catalog.motherboard.MotherboardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
+@Tag(name = "Motherboard Controller", description = "API for managing motherboards")
 @Controller
 @RequestMapping("/motherboard")
 public class MotherboardController {
@@ -26,14 +30,19 @@ public class MotherboardController {
         this.motherboardService = motherboardService;
     }
 
+    @Operation(summary = "List all motherboards", description = "This method lists all motherboards in the system.")
     @GetMapping(value = "")
     public String listMotherboards(Model model) {
         model.addAttribute("motherboardList", motherboardService.findAll());
         return "motherboards";
     }
 
+    @Operation(summary = "Search motherboards",
+            description = "This method searches for motherboards based on the provided filters.")
     @GetMapping("/search")
-    public String searchMotherboards(@ModelAttribute MotherboardFilter motherboardFilter, Model model) {
+    public String searchMotherboards(
+            @Parameter(description = "Motherboard filter object.")
+            @ModelAttribute MotherboardFilter motherboardFilter, Model model) {
         Iterable<MotherboardDto> motherboards = motherboardService.getMotherboardFiltered(motherboardFilter);
 
         if (motherboardFilter.hasCpuCoreVoltageStartFilter()) {
@@ -62,8 +71,11 @@ public class MotherboardController {
         return "motherboards";
     }
 
+    @Operation(summary = "Get edit motherboard form", description = "This method returns the edit motherboard form.")
     @GetMapping(value = "/edit")
-    public String getEditMotherboardForm(@RequestParam(name = "id") Long id, Model model) {
+    public String getEditMotherboardForm(
+            @Parameter(description = "The ID of the motherboard to edit.")
+            @RequestParam(name = "id") Long id, Model model) {
         Optional<MotherboardDto> optionalMotherboard = motherboardService.findDtoById(id);
         if (optionalMotherboard.isPresent()) {
             model.addAttribute("motherboard", optionalMotherboard.get());
@@ -72,8 +84,11 @@ public class MotherboardController {
         return "redirect:/motherboard";
     }
 
+    @Operation(summary = "Save motherboard", description = "This method saves a motherboard.")
     @PostMapping(value = "/save")
-    public String saveMotherboard(@ModelAttribute Motherboard motherboard) {
+    public String saveMotherboard(
+            @Parameter(description = "Motherboard object to save.")
+            @ModelAttribute Motherboard motherboard) {
         motherboardService.save(motherboard);
         return "redirect:/motherboard";
     }

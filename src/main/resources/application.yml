@@ -8,7 +8,7 @@ logging:
 
 spring:
   datasource:
-#    url: jdbc:h2:./hexlet
+    #    url: jdbc:h2:./hexlet
     url: jdbc:postgresql://localhost:5432/catalog
     username: postgres
     password: postgres
@@ -16,6 +16,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+springdoc:
+  swagger-ui:
+    path: /swagger.html
 
 #  liquibase:
 #    change-log: classpath:db/changelog/changelog-master.xml

@@ -9,6 +9,8 @@ import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
 import com.javarush.maximov.catalog.utils.Randomizer;
 import com.javarush.maximov.catalog.videocard.VideoCard;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping("/")
+@Tag(name = "Data Controller", description = "API for managing data")
 public class DataController {
 
     private final MotherboardService motherboardService;
@@ -42,7 +45,9 @@ public class DataController {
         this.computerService = computerService;
     }
 
+    @Operation(summary = "Get statistics", description = "This method returns statistics.")
     @GetMapping(value = "")
+
     public String index(Model model) {
         model.addAttribute("computerCount", computerService.count());
         model.addAttribute("motherboardCount", motherboardService.count());
@@ -51,6 +56,7 @@ public class DataController {
         return "index";
     }
 
+    @Operation(summary = "Delete all data", description = "This method deletes all data from the DB.")
     @PostMapping("/delete")
     public String deleteAll() {
         computerService.deleteAll();
@@ -60,6 +66,7 @@ public class DataController {
         return "redirect:/";
     }
 
+    @Operation(summary = "Upload data", description = "This method uploads data from JSON files.")
     @PostMapping("/upload")
     public String uploadAll() {
         motherboardService.loadListFromJson("motherboard.json");
