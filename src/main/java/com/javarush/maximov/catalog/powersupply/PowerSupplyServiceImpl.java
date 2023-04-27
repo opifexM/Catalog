@@ -3,35 +3,40 @@ package com.javarush.maximov.catalog.powersupply;
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class PowerSupplyServiceImpl implements PowerSupplyService {
 
-    public static final String POWERSUPPLY_JSON = "powersupply.json";
     private final PowerSupplyRepository powerSupplyRepository;
 
+    private final PowerSupplyMapper powerSupplyMapper;
+
     @Autowired
-    public PowerSupplyServiceImpl(PowerSupplyRepository powerSupplyRepository) {
+    public PowerSupplyServiceImpl(PowerSupplyRepository powerSupplyRepository, PowerSupplyMapper powerSupplyMapper) {
         this.powerSupplyRepository = powerSupplyRepository;
+        this.powerSupplyMapper = powerSupplyMapper;
     }
 
-    @Override
-    public Iterable<PowerSupply> findAll() {
-        return powerSupplyRepository.findAll(Sort.by("id"));
-    }
 
     @Override
-    public boolean existsById(long id) {
-        return powerSupplyRepository.existsById(id);
+    public Iterable<PowerSupplyDto> findAll() {
+        List<PowerSupply> powerSupplyList = powerSupplyRepository.findAll(Sort.by("id"));
+        return powerSupplyMapper.map(powerSupplyList);
     }
 
     @Override
     public void save(PowerSupply powerSupply) {
         powerSupplyRepository.save(powerSupply);
+    }
+
+    @Override
+    public Optional<PowerSupplyDto> findDtoById(long id) {
+        Optional<PowerSupply> optionalPowerSupply = powerSupplyRepository.findById(id);
+        return optionalPowerSupply.map(powerSupplyMapper::map);
     }
 
     @Override
@@ -45,14 +50,13 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
     }
 
     @Override
-    public Iterable<PowerSupply> saveList(Iterable<PowerSupply> powerSupplies) {
+    public void saveList(Iterable<PowerSupply> powerSupplies) {
         powerSupplyRepository.saveAll(powerSupplies);
-        return powerSupplyRepository.findAll();
     }
 
     @Override
-    public void loadListFromJson() {
-        List<PowerSupply> powerSupplyList = JsonService.jsonToList(POWERSUPPLY_JSON, PowerSupply[].class);
+    public void loadListFromJson(String file) {
+        List<PowerSupply> powerSupplyList = JsonService.jsonToList(file, PowerSupply[].class);
         saveList(powerSupplyList);
     }
 
@@ -62,23 +66,38 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
     }
 
     @Override
-    public Iterable<PowerSupply> findByNameContainsIgnoreCase(String name) {
-        return powerSupplyRepository.findByNameContainsIgnoreCase(name);
+    public Long findMinId() {
+        return powerSupplyRepository.findMinId();
     }
 
     @Override
-    public Iterable<PowerSupply> findByPowerBetween(int powerStart, int powerEnd) {
-        return powerSupplyRepository.findByPowerBetween(powerStart, powerEnd);
+    public Long findMaxId() {
+        return powerSupplyRepository.findMaxId();
     }
 
     @Override
-    public Iterable<PowerSupply> findByFanSizeGreaterThanEqual(int fanSize) {
-        return powerSupplyRepository.findByFanSizeGreaterThanEqual(fanSize);
-    }
+    public Iterable<PowerSupplyDto> getPowersuppliesFiltred(PowerSupplyFilter powerSupplyFilter) {
+        List<PowerSupply> powerSupplies;
+        if (powerSupplyFilter.hasFanSize() && powerSupplyFilter.hasFanSizeOperatorFilter()) {
+            switch (powerSupplyFilter.getFanSizeOperator()) {
+                case "greaterThanEqual" ->
+                        powerSupplies = powerSupplyRepository.findByFanSizeGreaterThanEqual(powerSupplyFilter.getFanSize());
+                case "lessThan" ->
+                        powerSupplies = powerSupplyRepository.findByFanSizeLessThan(powerSupplyFilter.getFanSize());
+                default -> powerSupplies = powerSupplyRepository.findAll();
+            }
 
-    @Override
-    public Iterable<PowerSupply> findByFanSizeLessThan(int fanSize) {
-        return powerSupplyRepository.findByFanSizeLessThan(fanSize);
+        } else if (powerSupplyFilter.hasPowerStart() && powerSupplyFilter.hasPowerEnd()) {
+            powerSupplies = powerSupplyRepository.findByPowerBetween(powerSupplyFilter.getPowerStart(),
+                    powerSupplyFilter.getPowerEnd());
+
+        } else if (powerSupplyFilter.hasNameFilter()) {
+            powerSupplies = powerSupplyRepository.findByNameContainsIgnoreCase(powerSupplyFilter.getName());
+
+        } else {
+            powerSupplies = powerSupplyRepository.findAll();
+        }
+        return powerSupplyMapper.map(powerSupplies);
     }
 }
 

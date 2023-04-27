@@ -1,38 +1,37 @@
 package com.javarush.maximov.catalog.computer;
 
 
-import com.javarush.maximov.catalog.utils.JsonService;
+import com.javarush.maximov.catalog.videocard.VideoCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ComputerServiceImpl implements ComputerService {
 
-    public static final String COMPUTER_JSON = "computer.json";
     private final ComputerRepository computerRepository;
+    private final ComputerMapper computerMapper;
+    
 
     @Autowired
-    public ComputerServiceImpl(ComputerRepository computerRepository) {
+    public ComputerServiceImpl(ComputerRepository computerRepository, ComputerMapper computerMapper) {
         this.computerRepository = computerRepository;
+        this.computerMapper = computerMapper;
     }
 
     @Override
-    public Iterable<Computer> findAll() {
-        return computerRepository.findAll(Sort.by("id"));
+    public Iterable<ComputerDto> findAll() {
+        List<Computer> computerList = computerRepository.findAll(Sort.by("id"));
+        return computerMapper.map(computerList);
     }
 
     @Override
-    public boolean existsById(long id) {
-        return computerRepository.existsById(id);
-    }
-
-    @Override
-    public Optional<Computer> findById(long id) {
-        return computerRepository.findById(id);
+    public Optional<ComputerDto> findById(long id) {
+        Optional<Computer> optionalComputer = computerRepository.findById(id);
+        return optionalComputer.map(computerMapper::map);
     }
 
     @Override
@@ -41,14 +40,24 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
+    public void deleteById(long id) {
+        computerRepository.deleteById(id);
+    }
+
+    @Override
     public void save(Computer computer) {
+        for (VideoCard videoCard : computer.getVideoCards()) {
+            List<Computer> computersUsingVideoCard = computerRepository.findAllByVideoCardsContaining(videoCard);
+            if (!computersUsingVideoCard.isEmpty()) {
+                return;
+            }
+        }
         computerRepository.save(computer);
     }
 
     @Override
-    public Iterable<Computer> saveList(Iterable<Computer> computers) {
+    public void saveList(Iterable<Computer> computers) {
         computerRepository.saveAll(computers);
-        return computerRepository.findAll();
     }
 
     @Override
@@ -56,6 +65,10 @@ public class ComputerServiceImpl implements ComputerService {
         return computerRepository.count();
     }
 
-
+    @Override
+    public Iterable<ComputerDto> getComputerFiltered(ComputerFilter computerFilter) {
+        List<Computer> computersByFilter = computerRepository.findComputersByFilter(computerFilter);
+        return computerMapper.map(computersByFilter);
+    }
 }
 

@@ -1,6 +1,8 @@
 package com.javarush.maximov.catalog.rest;
 
 import com.javarush.maximov.catalog.powersupply.PowerSupply;
+import com.javarush.maximov.catalog.powersupply.PowerSupplyDto;
+import com.javarush.maximov.catalog.powersupply.PowerSupplyFilter;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,40 +33,29 @@ public class PowerSupplyController {
     }
 
     @GetMapping("/search")
-    public String searchPowersupplies(@RequestParam(name = "powerStart", required = false) Integer powerStart,
-                                      @RequestParam(name = "powerEnd", required = false) Integer powerEnd,
-                                      @RequestParam(name = "fanSize", required = false) Integer fanSize,
-                                      @RequestParam(name = "fanSizeOperator", defaultValue = "greaterThanEqual") String fanSizeOperator,
-                                      @RequestParam(name = "name", required = false) String name,
-                                      Model model) {
-        Iterable<PowerSupply> powerSupplies;
-        if (fanSize != null) {
-            switch (fanSizeOperator) {
-                case "greaterThanEqual" -> powerSupplies = powerSupplyService.findByFanSizeGreaterThanEqual(fanSize);
-                case "lessThan" -> powerSupplies = powerSupplyService.findByFanSizeLessThan(fanSize);
-                default -> powerSupplies = powerSupplyService.findAll();
-            }
-            model.addAttribute("powersupplyFanSize", fanSize);
+    public String searchPowersupplies(@ModelAttribute PowerSupplyFilter powerSupplyFilter,  Model model) {
+        Iterable<PowerSupplyDto> powerSupplies = powerSupplyService.getPowersuppliesFiltred(powerSupplyFilter);
 
-        } else if (powerStart != null && powerEnd != null) {
-            powerSupplies = powerSupplyService.findByPowerBetween(powerStart, powerEnd);
-            model.addAttribute("powersupplyPowerStart", powerStart);
-            model.addAttribute("powersupplyPowerEnd", powerEnd);
-
-        } else if (name != null) {
-            powerSupplies = powerSupplyService.findByNameContainsIgnoreCase(name);
-            model.addAttribute("powersupplyName", name);
-
-        } else {
-            powerSupplies = powerSupplyService.findAll();
+        if (powerSupplyFilter.hasFanSize()) {
+            model.addAttribute("powersupplyFanSize", powerSupplyFilter.getFanSize());
         }
+        if (powerSupplyFilter.hasPowerStart()) {
+            model.addAttribute("powersupplyPowerStart", powerSupplyFilter.getPowerStart());
+        }
+        if (powerSupplyFilter.hasPowerEnd()) {
+            model.addAttribute("powersupplyPowerEnd", powerSupplyFilter.getPowerEnd());
+        }
+        if (powerSupplyFilter.hasNameFilter()) {
+            model.addAttribute("powersupplyName", powerSupplyFilter.getName());
+        }
+
         model.addAttribute("powersupplyList", powerSupplies);
         return "powersupplies";
     }
 
     @GetMapping(value = "/edit")
     public String getEditPowersupplyForm(@RequestParam(name = "id") Long id, Model model) {
-        Optional<PowerSupply> optionalPowerSupply = powerSupplyService.findById(id);
+        Optional<PowerSupplyDto> optionalPowerSupply = powerSupplyService.findDtoById(id);
         if (optionalPowerSupply.isPresent()) {
             model.addAttribute("powersupply", optionalPowerSupply.get());
             return "powersupplyEdit";

@@ -1,12 +1,16 @@
 package com.javarush.maximov.catalog.rest;
 
 import com.javarush.maximov.catalog.computer.Computer;
+import com.javarush.maximov.catalog.computer.ComputerDto;
 import com.javarush.maximov.catalog.computer.ComputerService;
 import com.javarush.maximov.catalog.motherboard.Motherboard;
+import com.javarush.maximov.catalog.motherboard.MotherboardDto;
 import com.javarush.maximov.catalog.motherboard.MotherboardService;
 import com.javarush.maximov.catalog.powersupply.PowerSupply;
+import com.javarush.maximov.catalog.powersupply.PowerSupplyDto;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
 import com.javarush.maximov.catalog.videocard.VideoCard;
+import com.javarush.maximov.catalog.videocard.VideoCardDto;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,18 +41,18 @@ public class ApiController {
     }
 
     @GetMapping("/computer")
-    public Iterable<Computer> getAllComputers() {
+    public Iterable<ComputerDto> getAllComputers() {
         return computerService.findAll();
     }
 
     @GetMapping("/motherboard")
-    public Iterable<Motherboard> getAllMotherboards() {
+    public Iterable<MotherboardDto> getAllMotherboards() {
         return motherboardService.findAll();
     }
 
     @PutMapping("/motherboard")
-    public Iterable<Motherboard> saveListMotherboard(@RequestBody Iterable<Motherboard> motherboards) {
-        return motherboardService.saveList(motherboards);
+    public void saveListMotherboard(@RequestBody Iterable<Motherboard> motherboards) {
+        motherboardService.saveList(motherboards);
     }
 
     @DeleteMapping("/motherboard")
@@ -57,12 +61,12 @@ public class ApiController {
     }
 
     @GetMapping("/powersupply")
-    public Iterable<PowerSupply> getAllPowerSupplies() {
+    public Iterable<PowerSupplyDto> getAllPowerSupplies() {
         return powerSupplyService.findAll();
     }
 
     @GetMapping("/videocard")
-    public Iterable<VideoCard> getAllVideoCard() {
+    public Iterable<VideoCardDto> getAllVideoCard() {
         return videoCardService.findAll();
     }
 

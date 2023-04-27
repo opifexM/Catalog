@@ -3,30 +3,29 @@ package com.javarush.maximov.catalog.motherboard;
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class MotherboardServiceImpl implements MotherboardService {
 
-    public static final String MOTHERBOARD_JSON = "motherboard.json";
     private final MotherboardRepository motherboardRepository;
 
+    private final MotherboardMapper motherboardMapper;
+
     @Autowired
-    public MotherboardServiceImpl(MotherboardRepository motherboardRepository) {
+    public MotherboardServiceImpl(MotherboardRepository motherboardRepository, MotherboardMapper motherboardMapper) {
         this.motherboardRepository = motherboardRepository;
+        this.motherboardMapper = motherboardMapper;
     }
 
     @Override
-    public Iterable<Motherboard> findAll() {
-        return motherboardRepository.findAll(Sort.by("id"));
-    }
-
-    @Override
-    public boolean existsById(long id) {
-        return motherboardRepository.existsById(id);
+    public Iterable<MotherboardDto> findAll() {
+        List<Motherboard> motherboardList = motherboardRepository.findAll(Sort.by("id"));
+        return motherboardMapper.map(motherboardList);
     }
 
     @Override
@@ -40,19 +39,24 @@ public class MotherboardServiceImpl implements MotherboardService {
     }
 
     @Override
+    public Optional<MotherboardDto> findDtoById(long id) {
+        Optional<Motherboard> motherboardOptional = motherboardRepository.findById(id);
+        return motherboardOptional.map(motherboardMapper::map);
+    }
+
+    @Override
     public void deleteAll() {
         motherboardRepository.deleteAll();
     }
 
     @Override
-    public Iterable<Motherboard> saveList(Iterable<Motherboard> motherboards) {
+    public void saveList(Iterable<Motherboard> motherboards) {
         motherboardRepository.saveAll(motherboards);
-        return motherboardRepository.findAll();
     }
 
     @Override
-    public void loadListFromJson() {
-        List<Motherboard> motherboardList = JsonService.jsonToList(MOTHERBOARD_JSON, Motherboard[].class);
+    public void loadListFromJson(String file) {
+        List<Motherboard> motherboardList = JsonService.jsonToList(file, Motherboard[].class);
         saveList(motherboardList);
     }
 
@@ -60,5 +64,25 @@ public class MotherboardServiceImpl implements MotherboardService {
     public long count() {
         return motherboardRepository.count();
     }
+
+    @Override
+    public Long findMinId() {
+        return motherboardRepository.findMinId();
+    }
+
+    @Override
+    public Long findMaxId() {
+        return motherboardRepository.findMaxId();
+    }
+
+    @Override
+    public Iterable<MotherboardDto> getMotherboardFiltered(MotherboardFilter filter) {
+        Specification<Motherboard> specification = new MotherboardSpecification(filter);
+        List<Motherboard> motherboardList = motherboardRepository.findAll(specification);
+        return motherboardMapper.map(motherboardList);
+    }
 }
+
+
+
 

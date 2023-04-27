@@ -1,6 +1,8 @@
 package com.javarush.maximov.catalog.rest;
 
 import com.javarush.maximov.catalog.videocard.VideoCard;
+import com.javarush.maximov.catalog.videocard.VideoCardDto;
+import com.javarush.maximov.catalog.videocard.VideoCardFilter;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,7 @@ public class VideoCardController {
 
     @GetMapping(value = "/edit")
     public String getEditVideocardForm(@RequestParam(name = "id") Long id, Model model) {
-        Optional<VideoCard> optionalVideoCard = videoCardService.findById(id);
+        Optional<VideoCardDto> optionalVideoCard = videoCardService.findDtoById(id);
         if (optionalVideoCard.isPresent()) {
             model.addAttribute("videocard", optionalVideoCard.get());
             return "videocardEdit";
@@ -46,49 +48,24 @@ public class VideoCardController {
         return "redirect:/videocard";
     }
 
-    // @GetMapping(value = "/search")
-    // public String searchVideocards(@RequestParam(name = "core") Integer core,
-    //                                @RequestParam(name = "operator") String operator,
-    //                                Model model) {
-    //     Iterable<VideoCard> videoCards = switch (operator) {
-    //         case "greaterThanEqual" -> videoCardService.findByCoreFrequencyGreaterThanEqual(core);
-    //         case "lessThan" -> videoCardService.findByCoreFrequencyLessThan(core);
-    //         default -> videoCardService.findAll();
-    //     };
-    //     model.addAttribute("videocardList", videoCards);
-    //     model.addAttribute("videocardCore", core);
-    //
-    //     return "videocards";
-    // }
-
     @GetMapping("/search")
-    public String searchVideocards(@RequestParam(name = "core", required = false) Integer core,
-                                   @RequestParam(name = "operator", defaultValue = "greaterThanEqual") String operator,
-                                   @RequestParam(name = "memoryBandwidthStart", required = false) Double memoryBandwidthStart,
-                                   @RequestParam(name = "memoryBandwidthEnd", required = false) Double memoryBandwidthEnd,
-                                   @RequestParam(name = "name", required = false) String name,
-                                   Model model) {
-        Iterable<VideoCard> videoCards;
-        if (core != null) {
-            switch (operator) {
-                case "greaterThanEqual" -> videoCards = videoCardService.findByCoreFrequencyGreaterThanEqual(core);
-                case "lessThan" -> videoCards = videoCardService.findByCoreFrequencyLessThan(core);
-                default -> videoCards = videoCardService.findAll();
-            }
-            model.addAttribute("videocardCore", core);
+    public String searchVideocards(@ModelAttribute VideoCardFilter videoCardFilter, Model model) {
+        Iterable<VideoCardDto> videoCards = videoCardService.getVideoCardFiltered(videoCardFilter);
 
-        } else if (memoryBandwidthStart != null && memoryBandwidthEnd != null) {
-            videoCards = videoCardService.findByMemoryBandwidthBetween(memoryBandwidthStart, memoryBandwidthEnd);
-            model.addAttribute("videocardMemoryBandwidthStart", memoryBandwidthStart);
-            model.addAttribute("videocardMemoryBandwidthEnd", memoryBandwidthEnd);
 
-        } else if (name != null) {
-            videoCards = videoCardService.findByNameContainsIgnoreCase(name);
-            model.addAttribute("videocardName", name);
-
-        } else {
-            videoCards = videoCardService.findAll();
+        if (videoCardFilter.hasCoreFilter()) {
+            model.addAttribute("videocardCore", videoCardFilter.getCore());
         }
+        if (videoCardFilter.hasMemoryBandwidthStartFilter()) {
+            model.addAttribute("videocardMemoryBandwidthStart", videoCardFilter.getMemoryBandwidthStart());
+        }
+        if (videoCardFilter.hasMemoryBandwidthEndFilter()) {
+            model.addAttribute("videocardMemoryBandwidthEnd", videoCardFilter.getMemoryBandwidthEnd());
+        }
+        if (videoCardFilter.hasNameFilter()) {
+            model.addAttribute("videocardName", videoCardFilter.getName());
+        }
+
         model.addAttribute("videocardList", videoCards);
         return "videocards";
     }

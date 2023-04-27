@@ -22,7 +22,8 @@
             <form method="GET" th:action="@{/powersupply/search}">
                 <div class="mb-3">
                     <label for="fanSize">Fan Size mm:</label>
-                    <input type="number" class="form-control" id="fanSize" name="fanSize" th:value="${powersupplyFanSize}" required/>
+                    <input type="number" class="form-control" id="fanSize" name="fanSize"
+                           th:value="${powersupplyFanSize}" required/>
                 </div>
                 <div class="mb-3">
                     <label for="fanSizeOperator">Operator:</label>
@@ -33,6 +34,7 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                    <a class="btn btn-outline-success btn-sm" href="/powersupply">Filter Reset</a>
                 </div>
             </form>
         </div>
@@ -51,6 +53,7 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                    <a class="btn btn-outline-success btn-sm" href="/powersupply">Filter Reset</a>
                 </div>
             </form>
         </div>
@@ -64,12 +67,14 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                    <a class="btn btn-outline-success btn-sm" href="/powersupply">Filter Reset</a>
                 </div>
             </form>
         </div>
     </div>
     <div class="mb-3"></div>
-
+</div>
+<div style="margin-left: 20px">
     <table id="Powersupplies" class="table table-bordered border-primary table-sm">
         <tr>
             <th>ID</th>

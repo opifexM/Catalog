@@ -1,6 +1,8 @@
 package com.javarush.maximov.catalog.rest;
 
 import com.javarush.maximov.catalog.computer.Computer;
+import com.javarush.maximov.catalog.computer.ComputerDto;
+import com.javarush.maximov.catalog.computer.ComputerFilter;
 import com.javarush.maximov.catalog.computer.ComputerService;
 import com.javarush.maximov.catalog.motherboard.MotherboardService;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/computer")
 public class ComputerController {
 
     private final MotherboardService motherboardService;
@@ -36,15 +38,36 @@ public class ComputerController {
         this.computerService = computerService;
     }
 
-    @GetMapping(value = "/computer")
+    @GetMapping(value = "")
     public String listComputers(Model model) {
         model.addAttribute("computerList", computerService.findAll());
         return "computers";
     }
 
-    @GetMapping(value = "/computer/edit")
+    @GetMapping("/search")
+    public String searchMotherboards(@ModelAttribute ComputerFilter computerFilter, Model model) {
+        Iterable<ComputerDto> computers = computerService.getComputerFiltered(computerFilter);
+
+        if (computerFilter.hasNameFilter()) {
+            model.addAttribute("name", computerFilter.getName());
+        }
+        if (computerFilter.hasMotherboardFilter()) {
+            model.addAttribute("motherboard", computerFilter.getMotherboard());
+        }
+        if (computerFilter.hasVideoCardsFilter()) {
+            model.addAttribute("videoCards", computerFilter.getVideoCards());
+        }
+        if (computerFilter.hasTesting()) {
+            model.addAttribute("testing", computerFilter.getTesting());
+        }
+
+        model.addAttribute("computerList", computers);
+        return "computers";
+    }
+
+    @GetMapping(value = "/edit")
     public String getEditComputerForm(@RequestParam(name = "id") Long id, Model model) {
-        Optional<Computer> optionalComputer = computerService.findById(id);
+        Optional<ComputerDto> optionalComputer = computerService.findById(id);
         if (optionalComputer.isPresent()) {
             model.addAttribute("computer", optionalComputer.get());
             model.addAttribute("motherboardList", motherboardService.findAll());
@@ -55,7 +78,16 @@ public class ComputerController {
         return "redirect:/computer";
     }
 
-    @GetMapping(value = "/computer/new")
+    @GetMapping(value = "/delete")
+    public String deleteComputerById(@RequestParam(name = "id") Long id) {
+        Optional<ComputerDto> optionalComputer = computerService.findById(id);
+        if (optionalComputer.isPresent()) {
+            computerService.deleteById(id);
+        }
+        return "redirect:/computer";
+    }
+
+    @GetMapping(value = "/new")
     public String getNewComputerForm(Model model) {
         model.addAttribute("computer", new Computer());
         model.addAttribute("motherboardList", motherboardService.findAll());
@@ -64,7 +96,7 @@ public class ComputerController {
         return "computerEdit";
     }
 
-    @PostMapping(value = "/computer/save")
+    @PostMapping(value = "/save")
     public String saveComputer(@ModelAttribute Computer computer) {
         computerService.save(computer);
         return "redirect:/computer";

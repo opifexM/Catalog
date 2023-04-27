@@ -1,30 +1,27 @@
 package com.javarush.maximov.catalog.videocard;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface VideoCardService {
-    Iterable<VideoCard> findAll();
+    Iterable<VideoCardDto> findAll();
+
+    Optional<VideoCardDto> findDtoById(long id);
 
     Optional<VideoCard> findById(long id);
-
-    boolean existsById(long id);
 
     void deleteAll();
 
     void save(VideoCard videoCard);
 
-    Iterable<VideoCard> saveList(Iterable<VideoCard> videoCards);
+    void saveList(Iterable<VideoCard> videoCards);
 
-    void loadListFromJson();
-
-    Iterable<VideoCard> findByCoreFrequencyGreaterThanEqual(int coreFrequency);
-
-    Iterable<VideoCard> findByCoreFrequencyLessThan(int coreFrequency);
-
-    Iterable<VideoCard> findByMemoryBandwidthBetween(double memoryBandwidthStart, double memoryBandwidthEnd);
-
-    Iterable<VideoCard> findByNameContainsIgnoreCase(String name);
+    void loadListFromJson(String file);
 
     long count();
+
+    Long findMinId();
+
+    Long findMaxId();
+
+    Iterable<VideoCardDto> getVideoCardFiltered(VideoCardFilter videoCardFilter);
 }

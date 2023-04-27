@@ -16,10 +16,59 @@
          th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
-    <h2>Computers</h2>
+    <h2>Computers - Spring Data JPA Criteria API</h2>
+
+    <form method="GET" th:action="@{/computer/search}">
+        <div class="row border border-info rounded">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="videoCards">Video Card Name:</label>
+                    <input type="text" id="videoCards" name="videoCards" class="form-control"
+                           th:value="${videoCards}" placeholder="Contain name">
+                </div>
+                <div class="mb-3">
+                    <label for="motherboard">Motherboard Name:</label>
+                    <input type="text" id="motherboard" name="motherboard" class="form-control"
+                           th:value="${motherboard}" placeholder="Contain name">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="computerStatus">Status:</label>
+                    <select class="form-control" id="computerStatus" name="computerStatus">
+                        <option value="" selected></option>
+                        <option value="FORMED">FORMED</option>
+                        <option value="TESTED">TESTED</option>
+                        <option value="READY">READY</option>
+                        <option value="SOLD">SOLD</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="testing" name="testing"
+                           th:checked="${testing}"/>
+                    <label for="testing">Testing</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="name">Computer Name:</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           th:value="${name}" placeholder="Contain name">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                    <a class="btn btn-outline-success btn-sm" href="/computer">Filter Reset</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="mb-3"></div>
     <div class="mb-3">
         <a class="btn btn-success" href="/computer/new">Create New</a>
     </div>
+
     <table id="Computers" class="table table-bordered border-primary">
         <tr>
             <th>ID</th>

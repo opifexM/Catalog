@@ -11,12 +11,66 @@
 <body class="d-flex flex-column min-vh-100">
 <div th:replace="~{menu.html}"></div>
 
-<div class="container mt-3">
+<div class="container-xxl mt-3">
     <div th:if="${session.flash}" th:class="'alert ' + ${session.flashtype}" role="alert"
          th:text="${session.flash}"></div>
     <div th:if="${session.flash}" th:text="${#session.removeAttribute('flash')}"></div>
 
-    <h2>Motherboards</h2>
+    <h2>Motherboards - Spring Data JPA Specification API</h2>
+    <form method="GET" th:action="@{/motherboard/search}">
+        <div class="row border border-info rounded">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="cpuCoreVoltageStart">CPU Core Voltage Phase Count Start:</label>
+                    <input type="number" class="form-control" id="cpuCoreVoltageStart" name="cpuCoreVoltageStart"
+                           th:value="${motherboardCpuCoreVoltageStart}" placeholder="Number of volts Start">
+                </div>
+                <div class="mb-3">
+                    <label for="cpuCoreVoltageEnd">CPU Core Voltage Phase Count Start End:</label>
+                    <input type="number" class="form-control" id="cpuCoreVoltageEnd" name="cpuCoreVoltageEnd"
+                           th:value="${motherboardCpuCoreVoltageEnd}" placeholder="Number of volts End">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="clockGenerator" name="clockGenerator"
+                           th:checked="${motherboardClockGenerator}"/>
+                    <label for="clockGenerator">Base Clock Generator</label>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="dualBIOS" name="dualBIOS"
+                           th:checked="${motherboardDualBIOS}"/>
+                    <label for="dualBIOS">Dual BIOS</label>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="biosFlash" name="biosFlash"
+                           th:checked="${motherboardBiosFlash}"/>
+                    <label for="biosFlash">Bios Flash Without Compatible CPU</label>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="clearCMOS" name="clearCMOS"
+                           th:checked="${motherboardClearCMOS}"/>
+                    <label for="clearCMOS">Rear IO Clear CMO</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="name">Board Model:</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           th:value="${motherboardName}" placeholder="Contain name">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-info btn-sm">Filter Search</button>
+                    <a class="btn btn-outline-success btn-sm" href="/motherboard">Filter Reset</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="mb-3"></div>
+</div>
+<div style="margin-left: 20px">
     <table id="Motherboards" class="table table-bordered border-primary table-sm">
         <tr>
             <th>ID</th>

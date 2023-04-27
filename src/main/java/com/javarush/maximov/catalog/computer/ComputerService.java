@@ -1,23 +1,21 @@
 package com.javarush.maximov.catalog.computer;
 
-import com.javarush.maximov.catalog.motherboard.Motherboard;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.data.domain.Sort;
-
 import java.util.Optional;
 
 public interface ComputerService {
-    Iterable<Computer> findAll();
+    Iterable<ComputerDto> findAll();
 
-    Optional<Computer> findById(long id);
-
-    boolean existsById(long id);
+    Optional<ComputerDto> findById(long id);
 
     void deleteAll();
 
     void save(Computer computer);
 
-    Iterable<Computer> saveList(Iterable<Computer> computers);
+    void deleteById(long id);
+
+    void saveList(Iterable<Computer> computers);
 
     long count();
+
+    Iterable<ComputerDto> getComputerFiltered(ComputerFilter computerFilter);
 }

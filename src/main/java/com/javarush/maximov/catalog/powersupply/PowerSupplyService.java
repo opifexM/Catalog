@@ -3,27 +3,25 @@ package com.javarush.maximov.catalog.powersupply;
 import java.util.Optional;
 
 public interface PowerSupplyService {
-    Iterable<PowerSupply> findAll();
+    Iterable<PowerSupplyDto> findAll();
 
     void deleteAll();
 
-    Optional<PowerSupply> findById(long id);
+    Optional<PowerSupplyDto> findDtoById(long id);
 
-    boolean existsById(long id);
+    Optional<PowerSupply> findById(long id);
 
     void save(PowerSupply powerSupply);
 
-    Iterable<PowerSupply> saveList(Iterable<PowerSupply> powerSupplies);
+    void saveList(Iterable<PowerSupply> powerSupplies);
 
-    void loadListFromJson();
+    void loadListFromJson(String file) ;
 
     long count();
 
-    Iterable<PowerSupply> findByNameContainsIgnoreCase(String name);
+    Long findMinId();
 
-    Iterable<PowerSupply> findByPowerBetween(int powerStart, int powerEnd);
+    Long findMaxId();
 
-    Iterable<PowerSupply> findByFanSizeGreaterThanEqual(int fanSize);
-
-    Iterable<PowerSupply> findByFanSizeLessThan(int fanSize);
+    Iterable<PowerSupplyDto> getPowersuppliesFiltred(PowerSupplyFilter powerSupplyFilter);
 }

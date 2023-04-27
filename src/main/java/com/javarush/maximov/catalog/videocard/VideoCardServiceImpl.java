@@ -3,30 +3,34 @@ package com.javarush.maximov.catalog.videocard;
 import com.javarush.maximov.catalog.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class VideoCardServiceImpl implements VideoCardService {
 
-    public static final String VIDEOCARD_JSON = "videocard.json";
     private final VideoCardRepository videoCardRepository;
 
+    private final VideoCardMapper videoCardMapper;
+
     @Autowired
-    public VideoCardServiceImpl(VideoCardRepository videoCardRepository) {
+    public VideoCardServiceImpl(VideoCardRepository videoCardRepository, VideoCardMapper videoCardMapper) {
         this.videoCardRepository = videoCardRepository;
+        this.videoCardMapper = videoCardMapper;
     }
 
     @Override
-    public Iterable<VideoCard> findAll() {
-        return videoCardRepository.findAll(Sort.by("id"));
+    public Iterable<VideoCardDto> findAll() {
+        List<VideoCard> videoCardList = videoCardRepository.findAll(Sort.by("id"));
+        return videoCardMapper.map(videoCardList);
     }
 
     @Override
-    public boolean existsById(long id) {
-        return videoCardRepository.existsById(id);
+    public Optional<VideoCardDto> findDtoById(long id) {
+        Optional<VideoCard> optionalVideoCard = videoCardRepository.findById(id);
+        return optionalVideoCard.map(videoCardMapper::map);
     }
 
     @Override
@@ -45,40 +49,51 @@ public class VideoCardServiceImpl implements VideoCardService {
     }
 
     @Override
-    public Iterable<VideoCard> saveList(Iterable<VideoCard> videoCards) {
+    public void saveList(Iterable<VideoCard> videoCards) {
         videoCardRepository.saveAll(videoCards);
-        return videoCardRepository.findAll();
     }
 
     @Override
-    public void loadListFromJson() {
-        List<VideoCard> videoCardList = JsonService.jsonToList(VIDEOCARD_JSON, VideoCard[].class);
+    public void loadListFromJson(String file) {
+        List<VideoCard> videoCardList = JsonService.jsonToList(file, VideoCard[].class);
         saveList(videoCardList);
-    }
-
-    @Override
-    public Iterable<VideoCard> findByCoreFrequencyGreaterThanEqual(int coreFrequency) {
-        return videoCardRepository.findByCoreFrequencyGreaterThanEqual(coreFrequency);
-    }
-
-    @Override
-    public Iterable<VideoCard> findByCoreFrequencyLessThan(int coreFrequency) {
-        return videoCardRepository.findByCoreFrequencyLessThan(coreFrequency);
-    }
-
-    @Override
-    public Iterable<VideoCard> findByMemoryBandwidthBetween(double memoryBandwidthStart, double memoryBandwidthEnd) {
-        return videoCardRepository.findByMemoryBandwidthBetween(memoryBandwidthStart, memoryBandwidthEnd);
-    }
-
-    @Override
-    public Iterable<VideoCard> findByNameContainsIgnoreCase(String name) {
-        return videoCardRepository.findByNameContainsIgnoreCase(name);
     }
 
     @Override
     public long count() {
         return videoCardRepository.count();
+    }
+
+    @Override
+    public Long findMinId() {
+        return videoCardRepository.findMinId();
+    }
+
+    @Override
+    public Long findMaxId() {
+        return videoCardRepository.findMaxId();
+    }
+
+    @Override
+    public Iterable<VideoCardDto> getVideoCardFiltered(VideoCardFilter videoCardFilter) {
+        List<VideoCard> videoCards;
+        if (videoCardFilter.hasCoreFilter() && videoCardFilter.hasOperatorFilter()) {
+            switch (videoCardFilter.getOperator()) {
+                case "greaterThanEqual" ->
+                        videoCards = videoCardRepository.findByCoreFrequencyGreaterThanEqual(videoCardFilter.getCore());
+                case "lessThan" ->
+                        videoCards = videoCardRepository.findByCoreFrequencyLessThan(videoCardFilter.getCore());
+                default -> videoCards = videoCardRepository.findAll();
+            }
+        } else if (videoCardFilter.hasMemoryBandwidthStartFilter() && videoCardFilter.hasMemoryBandwidthEndFilter()) {
+            videoCards = videoCardRepository.findByMemoryBandwidthBetween(videoCardFilter.getMemoryBandwidthStart(),
+                    videoCardFilter.getMemoryBandwidthEnd());
+        } else if (videoCardFilter.hasNameFilter()) {
+            videoCards = videoCardRepository.findByNameContainsIgnoreCase(videoCardFilter.getName());
+        } else {
+            videoCards = videoCardRepository.findAll();
+        }
+        return videoCardMapper.map(videoCards);
     }
 }
 

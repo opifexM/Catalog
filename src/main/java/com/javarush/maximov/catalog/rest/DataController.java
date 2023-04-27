@@ -6,19 +6,21 @@ import com.javarush.maximov.catalog.motherboard.Motherboard;
 import com.javarush.maximov.catalog.motherboard.MotherboardService;
 import com.javarush.maximov.catalog.powersupply.PowerSupply;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
+import com.javarush.maximov.catalog.utils.Randomizer;
 import com.javarush.maximov.catalog.videocard.VideoCard;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping("/")
@@ -42,7 +44,6 @@ public class DataController {
 
     @GetMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("message", "Hello World2222!");
         model.addAttribute("computerCount", computerService.count());
         model.addAttribute("motherboardCount", motherboardService.count());
         model.addAttribute("powerSupplyCount", powerSupplyService.count());
@@ -50,10 +51,9 @@ public class DataController {
         return "index";
     }
 
-
-    //+++++++++++++++++++++++++++++++++
     @PostMapping("/delete")
     public String deleteAll() {
+        computerService.deleteAll();
         motherboardService.deleteAll();
         powerSupplyService.deleteAll();
         videoCardService.deleteAll();
@@ -62,38 +62,47 @@ public class DataController {
 
     @PostMapping("/upload")
     public String uploadAll() {
-        motherboardService.loadListFromJson();
-        powerSupplyService.loadListFromJson();
-        videoCardService.loadListFromJson();
+        motherboardService.loadListFromJson("motherboard.json");
+        powerSupplyService.loadListFromJson("powersupply.json");
+        videoCardService.loadListFromJson("videocard.json");
 
-        Computer computer = new Computer();
-        computer.setName("For Testing");
-        computer.setMotherboard(motherboardService.findById(10).get());
-        computer.setPowerSupply(powerSupplyService.findById(15).get());
-        List<VideoCard> videoCardList = new ArrayList<>();
-        videoCardList.add(videoCardService.findById(5).get());
-        videoCardList.add(videoCardService.findById(6).get());
-        computer.setVideoCards(videoCardList);
-        computerService.save(computer);
+        int motherboardMinId = Math.toIntExact(motherboardService.findMinId());
+        int motherboardMaxId = Math.toIntExact(motherboardService.findMaxId());
+        int powerSupplyMinId = Math.toIntExact(powerSupplyService.findMinId());
+        int powerSupplyMaxId = Math.toIntExact(powerSupplyService.findMaxId());
+        int videoCardMinId = Math.toIntExact(videoCardService.findMinId());
+        int videoCardMaxId = Math.toIntExact(videoCardService.findMaxId());
 
-        Computer computer2 = new Computer();
-        computer2.setName("For Gaming");
-        computer2.setMotherboard(motherboardService.findById(12).get());
-        computer2.setPowerSupply(powerSupplyService.findById(18).get());
-        List<VideoCard> videoCardList2 = new ArrayList<>();
-        videoCardList2.add(videoCardService.findById(3).get());
-        computer2.setVideoCards(videoCardList2);
-        computerService.save(computer2);
+        for (int i = 1; i <= 20; i++) {
+            Computer computer = new Computer();
+            computer.setName("PC #" + i);
 
-        Computer computer3 = new Computer();
-        computer3.setName("For Office");
-        computer3.setMotherboard(motherboardService.findById(14).get());
-        computer3.setPowerSupply(powerSupplyService.findById(20).get());
-        List<VideoCard> videoCardList3 = new ArrayList<>();
-        videoCardList3.add(videoCardService.findById(28).get());
-        videoCardList3.add(videoCardService.findById(29).get());
-        computer3.setVideoCards(videoCardList3);
-        computerService.save(computer3);
+            int random = Randomizer.randomIntFromToNotInclude(motherboardMinId, motherboardMaxId);
+            Optional<Motherboard> optionalMotherboard = motherboardService.findById(random);
+            optionalMotherboard.ifPresent(computer::setMotherboard);
+
+            random = Randomizer.randomIntFromToNotInclude(powerSupplyMinId, powerSupplyMaxId);
+            Optional<PowerSupply> optionalPowerSupply = powerSupplyService.findById(random);
+            optionalPowerSupply.ifPresent(computer::setPowerSupply);
+
+            List<VideoCard> videoCardList = new ArrayList<>();
+            random = Randomizer.randomIntFromToNotInclude(videoCardMinId, videoCardMaxId);
+            Optional<VideoCard> optionalVideoCard1 = videoCardService.findById(random);
+            optionalVideoCard1.ifPresent(videoCardList::add);
+
+            int random2 = Randomizer.randomIntFromToNotInclude(videoCardMinId, videoCardMaxId);
+            Optional<VideoCard> optionalVideoCard2 = videoCardService.findById(random2);
+            optionalVideoCard2.ifPresent(videoCardList::add);
+
+            if (!videoCardList.isEmpty() && random != random2) {
+                computer.setVideoCards(videoCardList);
+            }
+
+            if (nonNull(computer.getMotherboard()) && nonNull(computer.getPowerSupply()) &&
+                    nonNull(computer.getVideoCards()) && !computer.getVideoCards().isEmpty()) {
+                computerService.save(computer);
+            }
+        }
 
         return "redirect:/";
     }

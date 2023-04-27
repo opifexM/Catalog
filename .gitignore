@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/main/generated/com/javarush/maximov/catalog/computer/ComputerMapperImpl.java
+/src/main/generated/com/javarush/maximov/catalog/motherboard/MotherboardMapperImpl.java
+/src/main/generated/com/javarush/maximov/catalog/powersupply/PowerSupplyMapperImpl.java
+/src/main/generated/com/javarush/maximov/catalog/videocard/VideoCardMapperImpl.java
