@@ -1,5 +1,6 @@
 package com.javarush.maximov.catalog.rest;
 
+import com.javarush.maximov.catalog.constant.ViewConstants;
 import com.javarush.maximov.catalog.motherboard.Motherboard;
 import com.javarush.maximov.catalog.motherboard.MotherboardDto;
 import com.javarush.maximov.catalog.motherboard.MotherboardFilter;
@@ -34,7 +35,7 @@ public class MotherboardController {
     @GetMapping(value = "")
     public String listMotherboards(Model model) {
         model.addAttribute("motherboardList", motherboardService.findAll());
-        return "motherboards";
+        return ViewConstants.MOTHERBOARDS;
     }
 
     @Operation(summary = "Search motherboards",
@@ -68,7 +69,7 @@ public class MotherboardController {
         }
 
         model.addAttribute("motherboardList", motherboards);
-        return "motherboards";
+        return ViewConstants.MOTHERBOARDS;
     }
 
     @Operation(summary = "Get edit motherboard form", description = "This method returns the edit motherboard form.")
@@ -79,9 +80,9 @@ public class MotherboardController {
         Optional<MotherboardDto> optionalMotherboard = motherboardService.findDtoById(id);
         if (optionalMotherboard.isPresent()) {
             model.addAttribute("motherboard", optionalMotherboard.get());
-            return "motherboardEdit";
+            return ViewConstants.MOTHERBOARD_EDIT;
         }
-        return "redirect:/motherboard";
+        return ViewConstants.REDIRECT_MOTHERBOARD;
     }
 
     @Operation(summary = "Save motherboard", description = "This method saves a motherboard.")
@@ -90,6 +91,6 @@ public class MotherboardController {
             @Parameter(description = "Motherboard object to save.")
             @ModelAttribute Motherboard motherboard) {
         motherboardService.save(motherboard);
-        return "redirect:/motherboard";
+        return ViewConstants.REDIRECT_MOTHERBOARD;
     }
 }

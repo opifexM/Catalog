@@ -1,5 +1,6 @@
 package com.javarush.maximov.catalog.rest;
 
+import com.javarush.maximov.catalog.constant.ViewConstants;
 import com.javarush.maximov.catalog.videocard.VideoCard;
 import com.javarush.maximov.catalog.videocard.VideoCardDto;
 import com.javarush.maximov.catalog.videocard.VideoCardFilter;
@@ -34,7 +35,7 @@ public class VideoCardController {
     @GetMapping(value = "")
     public String listVideocards(Model model) {
         model.addAttribute("videocardList", videoCardService.findAll());
-        return "videocards";
+        return ViewConstants.VIDEOCARDS;
     }
 
     @Operation(summary = "Get edit video card form", description = "This method returns the edit video card form.")
@@ -45,9 +46,9 @@ public class VideoCardController {
         Optional<VideoCardDto> optionalVideoCard = videoCardService.findDtoById(id);
         if (optionalVideoCard.isPresent()) {
             model.addAttribute("videocard", optionalVideoCard.get());
-            return "videocardEdit";
+            return ViewConstants.VIDEOCARD_EDIT;
         }
-        return "redirect:/videocard";
+        return ViewConstants.REDIRECT_VIDEOCARD;
     }
 
     @Operation(summary = "Save video card", description = "This method saves a video card.")
@@ -56,7 +57,7 @@ public class VideoCardController {
             @Parameter(description = "Video card object to save.")
             @ModelAttribute VideoCard videoCard) {
         videoCardService.save(videoCard);
-        return "redirect:/videocard";
+        return ViewConstants.REDIRECT_VIDEOCARD;
     }
 
     @Operation(summary = "Search video cards",
@@ -82,6 +83,6 @@ public class VideoCardController {
         }
 
         model.addAttribute("videocardList", videoCards);
-        return "videocards";
+        return ViewConstants.VIDEOCARDS;
     }
 }

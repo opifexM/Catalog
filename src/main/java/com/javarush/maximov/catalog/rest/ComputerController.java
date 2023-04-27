@@ -4,6 +4,7 @@ import com.javarush.maximov.catalog.computer.Computer;
 import com.javarush.maximov.catalog.computer.ComputerDto;
 import com.javarush.maximov.catalog.computer.ComputerFilter;
 import com.javarush.maximov.catalog.computer.ComputerService;
+import com.javarush.maximov.catalog.constant.ViewConstants;
 import com.javarush.maximov.catalog.motherboard.MotherboardService;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyService;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
@@ -44,7 +45,7 @@ public class ComputerController {
     @GetMapping(value = "")
     public String listComputers(Model model) {
         model.addAttribute("computerList", computerService.findAll());
-        return "computers";
+        return ViewConstants.COMPUTERS;
     }
 
     @Operation(summary = "Search computers",
@@ -69,7 +70,7 @@ public class ComputerController {
         }
 
         model.addAttribute("computerList", computers);
-        return "computers";
+        return ViewConstants.COMPUTERS;
     }
 
     @Operation(summary = "Get edit computer form", description = "This method returns the edit computer form.")
@@ -83,9 +84,9 @@ public class ComputerController {
             model.addAttribute("motherboardList", motherboardService.findAll());
             model.addAttribute("powerSupplyList", powerSupplyService.findAll());
             model.addAttribute("videoCardList", videoCardService.findAll());
-            return "computerEdit";
+            return ViewConstants.COMPUTER_EDIT;
         }
-        return "redirect:/computer";
+        return ViewConstants.REDIRECT_COMPUTER;
     }
 
     @Operation(summary = "Delete computer by ID", description = "This method deletes a computer by its ID.")
@@ -95,7 +96,7 @@ public class ComputerController {
         if (optionalComputer.isPresent()) {
             computerService.deleteById(id);
         }
-        return "redirect:/computer";
+        return ViewConstants.REDIRECT_COMPUTER;
     }
 
     @Operation(summary = "Get new computer form", description = "This method returns the new computer form.")
@@ -105,7 +106,7 @@ public class ComputerController {
         model.addAttribute("motherboardList", motherboardService.findAll());
         model.addAttribute("powerSupplyList", powerSupplyService.findAll());
         model.addAttribute("videoCardList", videoCardService.findAll());
-        return "computerEdit";
+        return ViewConstants.COMPUTER_EDIT;
     }
 
     @Operation(summary = "Save computer", description = "This method saves a computer.")
@@ -114,6 +115,6 @@ public class ComputerController {
             @Parameter(description = "The computer object to be saved.")
             @ModelAttribute Computer computer) {
         computerService.save(computer);
-        return "redirect:/computer";
+        return ViewConstants.REDIRECT_COMPUTER;
     }
 }

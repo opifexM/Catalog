@@ -1,5 +1,6 @@
 package com.javarush.maximov.catalog.rest;
 
+import com.javarush.maximov.catalog.constant.ViewConstants;
 import com.javarush.maximov.catalog.powersupply.PowerSupply;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyDto;
 import com.javarush.maximov.catalog.powersupply.PowerSupplyFilter;
@@ -34,7 +35,7 @@ public class PowerSupplyController {
     @GetMapping(value = "")
     public String listPowersupplies(Model model) {
         model.addAttribute("powersupplyList", powerSupplyService.findAll());
-        return "powersupplies";
+        return ViewConstants.POWERSUPPLIES;
     }
 
     @Operation(summary = "Search power supplies",
@@ -59,7 +60,7 @@ public class PowerSupplyController {
         }
 
         model.addAttribute("powersupplyList", powerSupplies);
-        return "powersupplies";
+        return ViewConstants.POWERSUPPLIES;
     }
 
     @Operation(summary = "Get edit power supply form", description = "This method returns the edit power supply form.")
@@ -70,9 +71,9 @@ public class PowerSupplyController {
         Optional<PowerSupplyDto> optionalPowerSupply = powerSupplyService.findDtoById(id);
         if (optionalPowerSupply.isPresent()) {
             model.addAttribute("powersupply", optionalPowerSupply.get());
-            return "powersupplyEdit";
+            return ViewConstants.POWERSUPPLY_EDIT;
         }
-        return "redirect:/powersupply";
+        return ViewConstants.REDIRECT_POWERSUPPLY;
     }
 
     @Operation(summary = "Save power supply", description = "This method saves a power supply.")
@@ -81,6 +82,6 @@ public class PowerSupplyController {
             @Parameter(description = "Power supply object to save.")
             @ModelAttribute PowerSupply powerSupply) {
         powerSupplyService.save(powerSupply);
-        return "redirect:/powersupply";
+        return ViewConstants.REDIRECT_POWERSUPPLY;
     }
 }
