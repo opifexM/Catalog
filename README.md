@@ -1,3 +1,4 @@
+[![Java CI](https://github.com/opifexM/Catalog/actions/workflows/main.yml/badge.svg)](https://github.com/opifexM/Catalog/actions/workflows/main.yml)
 
 # Catalog Project
 
