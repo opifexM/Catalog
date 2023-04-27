@@ -8,6 +8,7 @@ import com.javarush.maximov.catalog.videocard.VideoCardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-@Tag(name = "Video Card Controller", description = "API for managing video cards")
 @Controller
 @RequestMapping("/videocard")
+@Tag(name = "Video Card Controller", description = "API for managing video cards")
+@Slf4j
 public class VideoCardController {
 
     private final VideoCardService videoCardService;
@@ -34,6 +36,7 @@ public class VideoCardController {
     @Operation(summary = "List all video cards", description = "This method lists all video cards in the system.")
     @GetMapping(value = "")
     public String listVideocards(Model model) {
+        log.info("Listing all video cards");
         model.addAttribute("videocardList", videoCardService.findAll());
         return ViewConstants.VIDEOCARDS;
     }
@@ -43,6 +46,7 @@ public class VideoCardController {
     public String getEditVideocardForm(
             @Parameter(description = "The ID of the video card to edit.")
             @RequestParam(name = "id") Long id, Model model) {
+        log.info("Getting edit video card form for id: {}", id);
         Optional<VideoCardDto> optionalVideoCard = videoCardService.findDtoById(id);
         if (optionalVideoCard.isPresent()) {
             model.addAttribute("videocard", optionalVideoCard.get());
@@ -56,6 +60,7 @@ public class VideoCardController {
     public String saveVideocard(
             @Parameter(description = "Video card object to save.")
             @ModelAttribute VideoCard videoCard) {
+        log.info("Saving video card");
         videoCardService.save(videoCard);
         return ViewConstants.REDIRECT_VIDEOCARD;
     }
@@ -66,6 +71,7 @@ public class VideoCardController {
     public String searchVideocards(
             @Parameter(description = "Video card filter object.")
             @ModelAttribute VideoCardFilter videoCardFilter, Model model) {
+        log.info("Searching video cards with provided filters");
         Iterable<VideoCardDto> videoCards = videoCardService.getVideoCardFiltered(videoCardFilter);
 
 

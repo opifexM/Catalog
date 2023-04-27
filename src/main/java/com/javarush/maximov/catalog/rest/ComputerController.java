@@ -11,6 +11,7 @@ import com.javarush.maximov.catalog.videocard.VideoCardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
-@Tag(name = "Computer Controller", description = "API for managing computers")
 @Controller
 @RequestMapping("/computer")
+@Tag(name = "Computer Controller", description = "API for managing computers")
+@Slf4j
 public class ComputerController {
 
     private final MotherboardService motherboardService;
@@ -44,6 +46,7 @@ public class ComputerController {
     @Operation(summary = "List all computers", description = "This method lists all computers in the system.")
     @GetMapping(value = "")
     public String listComputers(Model model) {
+        log.info("Listing all computers");
         model.addAttribute("computerList", computerService.findAll());
         return ViewConstants.COMPUTERS;
     }
@@ -54,6 +57,7 @@ public class ComputerController {
     public String searchMotherboards(
             @Parameter(description = "Computer filter object.")
             @ModelAttribute ComputerFilter computerFilter, Model model) {
+        log.info("Searching computers with filter: {}", computerFilter);
         Iterable<ComputerDto> computers = computerService.getComputerFiltered(computerFilter);
 
         if (computerFilter.hasNameFilter()) {
@@ -78,6 +82,7 @@ public class ComputerController {
     public String getEditComputerForm(
             @Parameter(description = "The ID of the computer to edit.")
             @RequestParam(name = "id") Long id, Model model) {
+        log.info("Getting edit computer form for ID: {}", id);
         Optional<ComputerDto> optionalComputer = computerService.findById(id);
         if (optionalComputer.isPresent()) {
             model.addAttribute("computer", optionalComputer.get());
@@ -92,6 +97,7 @@ public class ComputerController {
     @Operation(summary = "Delete computer by ID", description = "This method deletes a computer by its ID.")
     @GetMapping(value = "/delete")
     public String deleteComputerById(@RequestParam(name = "id") Long id) {
+        log.info("Deleting computer by ID: {}", id);
         Optional<ComputerDto> optionalComputer = computerService.findById(id);
         if (optionalComputer.isPresent()) {
             computerService.deleteById(id);
@@ -102,6 +108,7 @@ public class ComputerController {
     @Operation(summary = "Get new computer form", description = "This method returns the new computer form.")
     @GetMapping(value = "/new")
     public String getNewComputerForm(Model model) {
+        log.info("Getting new computer form");
         model.addAttribute("computer", new Computer());
         model.addAttribute("motherboardList", motherboardService.findAll());
         model.addAttribute("powerSupplyList", powerSupplyService.findAll());
@@ -114,6 +121,7 @@ public class ComputerController {
     public String saveComputer(
             @Parameter(description = "The computer object to be saved.")
             @ModelAttribute Computer computer) {
+        log.info("Saving computer: {}", computer);
         computerService.save(computer);
         return ViewConstants.REDIRECT_COMPUTER;
     }

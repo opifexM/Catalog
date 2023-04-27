@@ -26,14 +26,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.postgresql:postgresql'
 
-    // стартер для Springdoc OpenAPI с интеграцией Swagger UI,
-    // автоматически подключает все зависимости и конфигурации для работы с Spring Web MVC
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
-    // Hibernate Validator (который является эталонной реализацией Jakarta Bean Validation)
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
-    // реализация Expression Language, необходимой для Hibernate Validator
     testImplementation 'org.glassfish:jakarta.el:5.0.0-M1'
-
 
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'

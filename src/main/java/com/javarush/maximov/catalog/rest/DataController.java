@@ -11,6 +11,7 @@ import com.javarush.maximov.catalog.videocard.VideoCard;
 import com.javarush.maximov.catalog.videocard.VideoCardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import static java.util.Objects.nonNull;
 @Controller
 @RequestMapping("/")
 @Tag(name = "Data Controller", description = "API for managing data")
+@Slf4j
 public class DataController {
 
     private final MotherboardService motherboardService;
@@ -49,6 +51,7 @@ public class DataController {
     @GetMapping(value = "")
 
     public String index(Model model) {
+        log.info("Fetching statistics");
         model.addAttribute("computerCount", computerService.count());
         model.addAttribute("motherboardCount", motherboardService.count());
         model.addAttribute("powerSupplyCount", powerSupplyService.count());
@@ -59,6 +62,7 @@ public class DataController {
     @Operation(summary = "Delete all data", description = "This method deletes all data from the DB.")
     @PostMapping("/delete")
     public String deleteAll() {
+        log.info("Deleting all data");
         computerService.deleteAll();
         motherboardService.deleteAll();
         powerSupplyService.deleteAll();
@@ -69,6 +73,7 @@ public class DataController {
     @Operation(summary = "Upload data", description = "This method uploads data from JSON files.")
     @PostMapping("/upload")
     public String uploadAll() {
+        log.info("Uploading data from JSON files");
         motherboardService.loadListFromJson("motherboard.json");
         powerSupplyService.loadListFromJson("powersupply.json");
         videoCardService.loadListFromJson("videocard.json");
@@ -81,6 +86,7 @@ public class DataController {
         int videoCardMaxId = Math.toIntExact(videoCardService.findMaxId());
 
         for (int i = 1; i <= 20; i++) {
+            log.info("Creating computer #{}", i);
             Computer computer = new Computer();
             computer.setName("PC #" + i);
 
