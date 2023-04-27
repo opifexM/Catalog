@@ -13,8 +13,6 @@ public interface ComputerService {
 
     void deleteById(long id);
 
-    void saveList(Iterable<Computer> computers);
-
     long count();
 
     Iterable<ComputerDto> getComputerFiltered(ComputerFilter computerFilter);

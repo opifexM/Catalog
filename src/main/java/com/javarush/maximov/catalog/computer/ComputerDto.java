@@ -5,7 +5,6 @@ import com.javarush.maximov.catalog.powersupply.PowerSupplyDto;
 import com.javarush.maximov.catalog.videocard.VideoCardDto;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

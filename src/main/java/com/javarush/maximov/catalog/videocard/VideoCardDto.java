@@ -2,8 +2,6 @@ package com.javarush.maximov.catalog.videocard;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * A DTO for the {@link VideoCard} entity
  */

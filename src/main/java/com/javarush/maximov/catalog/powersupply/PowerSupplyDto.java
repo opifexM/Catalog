@@ -2,8 +2,6 @@ package com.javarush.maximov.catalog.powersupply;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * A DTO for the {@link PowerSupply} entity
  */

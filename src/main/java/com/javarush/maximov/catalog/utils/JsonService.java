@@ -15,6 +15,12 @@ public class JsonService {
     private JsonService() {
     }
 
+    public static class JsonProcessingException extends RuntimeException {
+        public JsonProcessingException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+
     public static <T> List<T> jsonToList(String jsonFileName, Class<T[]> type) {
         try {
             log.info("Reading JSON file and converting to list: {}", jsonFileName);
@@ -26,7 +32,7 @@ public class JsonService {
             return List.of(mapper.readValue(content, type));
         } catch (IOException e) {
             log.error("Error while reading JSON file and converting to list: {}", jsonFileName, e);
-            throw new RuntimeException(e);
+            throw new JsonProcessingException("Error processing JSON file: " + jsonFileName, e);
         }
     }
 }

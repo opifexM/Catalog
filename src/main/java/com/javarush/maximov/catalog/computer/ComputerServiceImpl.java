@@ -65,13 +65,6 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
-    public void saveList(Iterable<Computer> computers) {
-        log.info("Saving list of computers");
-        computerRepository.saveAll(computers);
-        log.info("List of computers saved");
-    }
-
-    @Override
     public long count() {
         log.info("Counting computers");
         return computerRepository.count();
