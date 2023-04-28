@@ -56,3 +56,16 @@ jacocoTestReport {
         xml.required = true
     }
 }
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class': 'com.javarush.maximov.catalog.App'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+
+    } {
+        exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    }
+}
