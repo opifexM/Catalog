@@ -21,12 +21,12 @@ The project uses the following technologies:
 
 The Catalog project provides four different endpoints for querying data:
 
-|  Endpoint| Query Method |
-|--|--|
-| Computers | Spring Data JPA Criteria API |
-| Motherboards | Spring Data JPA Specification API |
+| Endpoint       | Query Method                       |
+|----------------|------------------------------------|
+| Computers      | Spring Data JPA Criteria API       |
+| Motherboards   | Spring Data JPA Specification API  |
 | Power Supplies | Annotation-based Query Declaration |
-| Video Cards | Query Creation from Method Names |
+| Video Cards    | Query Creation from Method Names   |
 
 
 ## API Functionality

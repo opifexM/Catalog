@@ -29,7 +29,7 @@ class AppTests {
     private TestRestTemplate restTemplate;
 
     @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 
     static {
         postgres.start();
