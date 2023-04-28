@@ -4,6 +4,8 @@
 
 # Catalog Project
 
+Web link: https://catalog-production.up.railway.app
+
 This is the README for the **Catalog** project. It is a web application that allows users to manage and query data related to computer components such as computers, motherboards, power supplies, and video cards.
 
 ## Technologies
