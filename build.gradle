@@ -11,10 +11,6 @@ group = 'com.javarush.maximov'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-application {
-    mainClassName = 'com.javarush.maximov.catalog.App'
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -65,4 +61,13 @@ jacocoTestReport {
     reports {
         xml.required = true
     }
+}
+
+jar {
+    duplicatesStrategy = 'exclude'
+    archiveFileName = "Catalog.jar"
+    manifest {
+        attributes 'Main-Class': 'com.javarush.maximov.catalog.App'
+    }
+    from { (configurations.runtimeClasspath).collect { it.isDirectory() ? it : zipTree(it) } }
 }
