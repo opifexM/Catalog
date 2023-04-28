@@ -110,7 +110,10 @@
             </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/computer/edit(id=${computer.getId})}">Edit</a>
-                <a class="btn btn-danger" th:href="@{/computer/delete(id=${computer.getId})}">Delete</a>
+                <form th:action="@{/computer/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${computer.getId()}" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
     </table>

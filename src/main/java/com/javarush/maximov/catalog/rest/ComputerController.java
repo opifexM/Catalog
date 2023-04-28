@@ -95,7 +95,7 @@ public class ComputerController {
     }
 
     @Operation(summary = "Delete computer by ID", description = "This method deletes a computer by its ID.")
-    @GetMapping(value = "/delete")
+    @PostMapping (value = "/delete")
     public String deleteComputerById(@RequestParam(name = "id") Long id) {
         log.info("Deleting computer by ID: {}", id);
         Optional<ComputerDto> optionalComputer = computerService.findById(id);

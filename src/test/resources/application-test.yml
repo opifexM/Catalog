@@ -1,0 +1,16 @@
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+springdoc:
+  swagger-ui:
+    path: /swagger.html
