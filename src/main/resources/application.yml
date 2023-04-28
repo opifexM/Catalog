@@ -7,9 +7,13 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/catalog
-    username: postgres
-    password: postgres
+#    url: jdbc:postgresql://localhost:5432/catalog
+#    username: postgres
+#    password: postgres
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+
   jpa:
     show-sql: true
     hibernate:
